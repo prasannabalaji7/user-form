@@ -1,0 +1,64 @@
+ body{
+	margin:0;
+	padding: 0;
+	width:100%;
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
+.flexParent{
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;	
+    justify-content: center;
+    margin : 5px;
+}
+
+.borderContainer {
+	border-width: .2rem .2rem 0;
+    border-radius: 8px 8px 0 0;
+    padding: 1rem;
+    margin:1rem;
+    border: .2rem solid #ececec;
+ }
+
+ .custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[readonly].plainView{
+  background-color:#fff;
+  border: none;
+  font-size: 1em;
+  background-image: none;
+  border-color: none;
+  box-shadow:none;
+}
+
+.list-group-item.borderless {
+  border: 0 none;
+  padding-top:0.2em;
+}
+
+.list-group > div:first-child {
+  font-weight: bold;
+  font-size: 1.3em;
+  padding-top: 1em;
+}
+
+.custom-file-input::before {
+  content: 'Upload Profile';
+  background-color: transparent;
+  background-image: none;
+  border-color: #007bff;
+  display: inline-block;
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
