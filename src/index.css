@@ -2,27 +2,33 @@
 	margin:0;
 	padding: 0;
 	width:100%;
-    overflow-x:hidden;
-    overflow-y:hidden;
+  margin-top: 2em;
+  overflow-x:hidden;
+  overflow-y:scroll;
 }
+
 .flexParent{
 	display:flex;
 	flex-direction: row;
 	flex-wrap: wrap;	
-    justify-content: center;
-    margin : 5px;
+  justify-content: center;
+  margin : 5px;
+  background-color: #fff;
 }
 
 .borderContainer {
-	border-width: .2rem .2rem 0;
+	  border-width: .2rem .2rem 0;
     border-radius: 8px 8px 0 0;
     padding: 1rem;
     margin:1rem;
     border: .2rem solid #ececec;
  }
 
- .custom-file-input::-webkit-file-upload-button {
-  visibility: hidden;
+.borderContainer > .card {
+      min-width: 15em;
+}
+.custom-file-input::-webkit-file-upload-button {
+visibility: hidden;
 }
 
 input[readonly].plainView{
@@ -61,4 +67,51 @@ input[readonly].plainView{
   text-shadow: 1px 1px #fff;
   font-weight: 700;
   font-size: 10pt;
+}
+
+.toolBar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: end;
+  width: 98%;
+  margin: 7px;
+}
+
+.parentForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #dadcdc; 
+  margin: auto;
+  width: 60%;
+}
+
+.customSpacing {
+  width: 25%;
+  margin: 10px;
+}
+
+.error
+{
+    border-bottom: 1px solid #eb516d;
+}
+
+@media screen and (max-width:600px) {
+  .toolBar
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: end;
+    width: 100%;
+    margin: 7px;
+  }
+  .parentForm {
+    background-color: #dadcdc; 
+    margin: auto;
+    width: 100%;    
+    overflow-x:hidden;
+    overflow-y:scroll;
+    }
 }
