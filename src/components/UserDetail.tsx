@@ -173,7 +173,7 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		      Mobile 
 		    </Form.Label>
 		    <Col sm={8}>
-		      <Form.Control className={valid.notEditable +' '+valid.mobileValid} type="text" placeholder="Mobile" value={props.mobile} onChange={props.handleMobileChange}/>
+		      <Form.Control className={valid.notEditable +' '+valid.mobileValid} readOnly={valid.readOnly} type="text" placeholder="Mobile" value={props.mobile} onChange={props.handleMobileChange}/>
 		      { (valid.mobileValid) && <Form.Control.Feedback className ="d-block" type="invalid">
 	            please apply correct country code and number
 	      		</Form.Control.Feedback>
@@ -190,6 +190,7 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		       <Form.Control
 		        as="select"
 		        className ={valid.notEditable}
+		        readOnly={valid.readOnly}
 		        id="inlineFormCustomSelect"	onChange={props.handleCountryChange}>
 		      {
 
