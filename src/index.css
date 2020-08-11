@@ -26,6 +26,7 @@
 
 .borderContainer > .card {
       min-width: 15em;
+      border:transparent;
 }
 .custom-file-input::-webkit-file-upload-button {
 visibility: hidden;
@@ -78,13 +79,18 @@ input[readonly].plainView{
   margin: 7px;
 }
 
+.usercontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #dadcdc;
+    margin: auto;
+    width: 60%;
+    margin-top: 5%;
+}
+
 .parentForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #dadcdc; 
-  margin: auto;
-  width: 60%;
+   width: 60%;
 }
 
 .customSpacing {
@@ -97,21 +103,20 @@ input[readonly].plainView{
     border-bottom: 1px solid #eb516d;
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:700px) {
+  .usercontainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #dadcdc;
+    width: 100%;
+    margin-top:0;
+}
   .toolBar
   {
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
-    align-content: end;
-    width: 100%;
-    margin: 7px;
-  }
-  .parentForm {
-    background-color: #dadcdc; 
-    margin: auto;
-    width: 100%;    
-    overflow-x:hidden;
-    overflow-y:scroll;
-    }
+    align-content: center; 
+  }  
 }

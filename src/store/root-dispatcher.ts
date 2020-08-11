@@ -1,30 +1,33 @@
-import {Dispatch} from 'redux';
-import {DispatchAction, InitialState, rootReducer} from "./root-reducer";
+import { Dispatch } from 'redux';
+import { DispatchAction, InitialStateInterface, rootReducer } from "./root-reducer";
 
 
 export class RootDispatcher {
 
     private readonly dispatch: Dispatch<DispatchAction>;
 
-    constructor(dispatch: Dispatch<DispatchAction>){
+    constructor(dispatch: Dispatch<DispatchAction>) {
 
-        this.dispatch = dispatch; 
+        this.dispatch = dispatch;
 
     }
 
-    nameChange = (userName: string,userValid:boolean) => this.dispatch({type: "nameChange", payload: {userName,userValid}});    
+    nameChange = (userName: string) => this.dispatch({ type: "nameChange", payload: { userName } });
 
-    emailChange = (email: string,mailValid:boolean) => this.dispatch({type: "emailChange", payload: {email,mailValid}});    
+    emailChange = (email: string) => this.dispatch({ type: "emailChange", payload: { email} });
 
-    roleChange = (role: string,roleValid:boolean) => this.dispatch({type: "roleChange", payload: {role,roleValid}});    
+    roleChange = (role: string) => this.dispatch({ type: "roleChange", payload: { role } });
 
-	numberChange = (mobile: string,numberValid:boolean) => this.dispatch({type: "numberChange", payload: {mobile,numberValid}});    
+    numberChange = (mobile: string) => this.dispatch({ type: "numberChange", payload: { mobile} });
 
-    countryChange = (country:string,mobilecode: string) => this.dispatch({type: "countryChange", payload: {country,mobilecode}});  
+    countryChange = (country: string) => this.dispatch({ type: "countryChange", payload: { country} });
 
-    onEdit  = (isEdittable: boolean) => this.dispatch({type: "onEdit", payload: {isEdittable}});
+    validateSubmit = (formValid: boolean)=> this.dispatch({type:"validateSubmit",payload: {formValid}});
 
-    onSubmit  = (userName: string,email: string,role: string,mobile: string,country:string,isEdittable: boolean) => this.dispatch({type: "onSubmit", payload: {userName,email,role,mobile,country,isEdittable}});
+    onEdit = (isEdittable: boolean) => this.dispatch({ type: "onEdit", payload: { isEdittable } });
+
+    onSubmit = (userName: string, email: string, role: string, mobile: string, country: string, isEdittable: boolean) => this.dispatch({ type: "onSubmit", payload: { userName, email, role, mobile, country, isEdittable } });
+
 
 
 }

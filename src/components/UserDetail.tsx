@@ -6,48 +6,120 @@ import {countryData} from '../constants/Constants';
 
 interface UserDetailProps {
    userName: string;
-   handleUserName: (e: ChangeEvent<HTMLInputElement>)=>void;
-   handleRoleChange: (e: ChangeEvent<HTMLInputElement>)=>void;
-   handleMobileChange: (e: ChangeEvent<HTMLInputElement>)=>void;
-   handleEmailChange : (e: ChangeEvent<HTMLInputElement>)=>void;
-   handleCountryChange: (e: ChangeEvent<HTMLInputElement>)=>void;
    email: string;
    role: string;
    mobile:string;
    country:string;
    isEdittable:boolean;
-   emailValid:boolean;
-   userValid:boolean;
-   roleValid:boolean;
-   mobileValid:boolean;
-
+   formValid:boolean;
+   handleUserName: (e: ChangeEvent<HTMLInputElement>)=>void;
+   handleRoleChange: (e: ChangeEvent<HTMLInputElement>)=>void;
+   handleMobileChange: (e: ChangeEvent<HTMLInputElement>)=>void;
+   handleEmailChange : (e: ChangeEvent<HTMLInputElement>)=>void;
+   handleCountryChange: (e: ChangeEvent<HTMLInputElement>)=>void;
+   
 }
 
 
+
 const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
-	
-	
+
+
 	const dispatch = useDispatch();
 	
     const rootDispatcher = new RootDispatcher(dispatch);
-    const [plainView,setPlainView] = useState({notEditable:"",
-    											readOnly:"",
+    const [valid,setValid] = useState({notEditable:"",
+    											readOnly:false,
     											emailValid:"",
     											userValid:"",
     											roleValid:"",
-    											mobileValid:""});
+    											mobileValid:"",
+    											formValid:false});
 
+
+	function validate(field:string) {
+
+	switch(field){
+		case "userName":
+		{
+			let lettersOnly = new RegExp('^[a-zA-Z_ ]*$', 'i');
+			if (lettersOnly.test(props.userName)) {
+			      setValid((state)=>({...state,userValid:""}));
+			    } else {
+			      setValid((state)=>({...state,userValid:"is-invalid"}));
+			    }
+		}
+		case "email":
+		{
+			if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(props.email)) {
+		      setValid((state)=>({...state,emailValid:""}));
+		    } else {
+		      setValid((state)=>({...state,emailValid:"is-invalid"}));
+		    }			
+		}
+		case "role":
+		{
+			let lettersOnly = new RegExp('^[a-zA-Z_ ]*$', 'i');
+			if (lettersOnly.test(props.role)) {
+			      setValid((state)=>({...state,roleValid:""}));
+			    } else {
+			      setValid((state)=>({...state,roleValid:"is-invalid"}));
+			    }
+		}
+		case "mobile":
+		{
+			let  mobilecode = countryData.filter(item => item.name === props.country)[0].value;
+			if (/^\+[1-9]{1}[0-9]{7,11}$/.test(props.mobile) && props.mobile.startsWith("+"+mobilecode)) {
+		      setValid((state)=>({...state,mobileValid:""}));
+		    } else {
+		      setValid((state)=>({...state,mobileValid:"is-invalid"}));
+		    }
+			
+		}
+		default : 
+		{
+			setValid((state)=>({...state}));
+		}
+	}
+}
+
+	useEffect(()=>{
+		if(!valid.emailValid && !valid.userValid && !valid.roleValid && !valid.mobileValid){
+			rootDispatcher.validateSubmit(valid.formValid);
+		}
+
+	},[valid.emailValid,valid.userValid,valid.roleValid,valid.mobileValid]);
+
+    useEffect(()=>{		
+    	validate("userName");
+    },[props.userName]);
 
     useEffect(()=>{
-		let isEdittable = props.isEdittable;
-	    setPlainView({notEditable:isEdittable?"plainView":"", 
-	    			readOnly:isEdittable?"readOnly":"",
-	    			emailValid:props.emailValid?"":"error",
-    				userValid:props.userValid?"":"error",
-    				roleValid:props.roleValid?"":"error",
-    				mobileValid:props.mobileValid?"":"error"});
+    	validate("email");
+    },[props.email]);
 
-    },[props.userValid,props.emailValid,props.roleValid,props.mobileValid,props.isEdittable]);
+     useEffect(()=>{
+     	validate("role");
+    },[props.role]);
+
+     useEffect(()=>{
+     	validate("mobile")
+     },[props.mobile]);
+
+     useEffect(()=>{
+     	validate("mobile")
+     },[props.country]);
+
+     useEffect(()=>{
+     	if(props.isEdittable) {
+     		setValid((state)=>({...state,notEditable:"plainView",readOnly:true}));
+     	}else{     		
+     		setValid((state)=>({...state,notEditable:"",readOnly:false}));
+     	}
+
+     },[props.isEdittable]);
+
+
 
 
 	return (
@@ -60,16 +132,26 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		    </Form.Label>
 		    <Col sm={8}>
 
-			<Form.Control className={plainView.notEditable +' '+plainView.userValid}  type="text" placeholder="Name" value={props.userName} onChange={props.handleUserName} required/>
+			<Form.Control className={valid.notEditable+' '+valid.userValid}  readOnly={valid.readOnly} type="text" placeholder="Name" value={props.userName} onChange={props.handleUserName} required/>
+			{ (valid.userValid) && <Form.Control.Feedback className ="d-block" type="invalid">
+	            please enter a valid only alphabets
+	      		</Form.Control.Feedback>
+	      	}
 		    </Col>
+		    
 		  </Form.Group>
+		  
 
 		  <Form.Group as={Row} controlId="formHorizontalEmail">
 		    <Form.Label column sm={4}>
 		      Email
 		    </Form.Label>
 		    <Col sm={8}>
-		      <Form.Control className={plainView.notEditable +' '+plainView.emailValid} type="email" placeholder="Email" value={props.email} onChange={props.handleEmailChange}/>
+		      <Form.Control className={valid.notEditable +' '+valid.emailValid} readOnly={valid.readOnly} type="email" placeholder="Email" value={props.email} onChange={props.handleEmailChange}/>
+		      { (valid.emailValid) && <Form.Control.Feedback className ="d-block" type="invalid">
+	            	please enter email in email@domain.com format
+	      		</Form.Control.Feedback>
+	      	}
 		    </Col>
 		  </Form.Group>
 
@@ -78,7 +160,11 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		      Role
 		    </Form.Label>
 		    <Col sm={8}>
-		      <Form.Control className={plainView.notEditable +' '+plainView.roleValid} type="text" placeholder="Role" value={props.role} onChange={props.handleRoleChange}/>
+		      <Form.Control className={valid.notEditable +' '+valid.roleValid} readOnly={valid.readOnly} type="text" placeholder="Role" value={props.role} onChange={props.handleRoleChange}/>
+		      { (valid.roleValid) && <Form.Control.Feedback className ="d-block" type="invalid">
+	            please enter a valid only alphabets
+	      		</Form.Control.Feedback>
+	      	  }
 		    </Col>
 		  </Form.Group>
 
@@ -87,7 +173,11 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		      Mobile 
 		    </Form.Label>
 		    <Col sm={8}>
-		      <Form.Control className={plainView.notEditable +' '+plainView.mobileValid} type="text" placeholder="Mobile" value={props.mobile} onChange={props.handleMobileChange}/>
+		      <Form.Control className={valid.notEditable +' '+valid.mobileValid} type="text" placeholder="Mobile" value={props.mobile} onChange={props.handleMobileChange}/>
+		      { (valid.mobileValid) && <Form.Control.Feedback className ="d-block" type="invalid">
+	            please apply correct country code and number
+	      		</Form.Control.Feedback>
+	      	  }
 		    </Col>
 		  </Form.Group>
 
@@ -99,7 +189,7 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		    	{(!props.isEdittable) ? (
 		       <Form.Control
 		        as="select"
-		        className ={plainView.notEditable}
+		        className ={valid.notEditable}
 		        id="inlineFormCustomSelect"	onChange={props.handleCountryChange}>
 		      {
 
@@ -108,7 +198,7 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		      	})
 		      }
 		      </Form.Control>):(
-		      <Form.Control className ={plainView.notEditable} type="text" placeholder="Name" value={props.country}/>
+		      <Form.Control className ={valid.notEditable} type="text" placeholder="Name" value={props.country}/>
 		      )}
 		    </Col>
 		  </Form.Group>		 
