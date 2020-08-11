@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { ChangeEvent, MouseEvent,useEffect } from 'react';
+import React, { ChangeEvent, MouseEvent, useEffect } from 'react';
 import ProfileCard from './ProfileCard';
 import { useSelector, useDispatch } from "react-redux";
 import { InitialStateInterface } from "../store/root-reducer";
-import UserDetailComponent from './UserDetail';
+import { UserDetail } from './UserDetail';
 import RootDispatcher from '../store/root-dispatcher';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 
@@ -27,10 +27,10 @@ export const UserProfile = () => {
   }
 
   const handleMobileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    rootDispatcher.numberChange(e.target.value  );
+    rootDispatcher.numberChange(e.target.value);
   }
 
-  const handleCountryChange = (e: ChangeEvent<HTMLInputElement>) => { 
+  const handleCountryChange = (e: ChangeEvent<HTMLInputElement>) => {
     rootDispatcher.countryChange(e.target.value);
   }
 
@@ -38,7 +38,7 @@ export const UserProfile = () => {
     rootDispatcher.roleChange(e.target.value);
   }
 
-  const handleSubmit =(e: MouseEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (formData.isEditEnabled) {
       rootDispatcher.onEdit(formData.isEditEnabled);
@@ -48,22 +48,22 @@ export const UserProfile = () => {
   }
 
   const handleCancel = () => {
-    if(!formData.isEditEnabled){
+    if (!formData.isEditEnabled) {
       rootDispatcher.onCancel();
     }
   }
 
   let valid = (!formData.isEditEnabled && formData.formValid);
-  const { userName, role, country, isEditEnabled,formValid } = formData;
+  const { userName, role, country, isEditEnabled, formValid } = formData;
   const { userProfileName, userProfileRole, userProfileCountry, file } = formData.profileData;
   const userDetails = { ...formData }
 
   return (
-    <div className ="usercontainer">
+    <div className="usercontainer">
       <div className="flexParent">
-        <ProfileCard userProfileName={userProfileName} file={file} userProfileRole={userProfileRole} userProfileCountry={userProfileCountry} isEditEnabled={isEditEnabled}/>
+        <ProfileCard userProfileName={userProfileName} file={file} userProfileRole={userProfileRole} userProfileCountry={userProfileCountry} isEditEnabled={isEditEnabled} />
 
-        <UserDetailComponent
+        <UserDetail
           handleEmailChange={handleEmailChange}
           handleCountryChange={handleCountryChange}
           handleUserName={handleUserName}
@@ -72,12 +72,12 @@ export const UserProfile = () => {
           {...userDetails} />
       </div>
       <div className="toolBar">
-        <Button type="submit" className="customSpacing" disabled={formData.isEditEnabled ?false : !valid} onClick={handleSubmit}>
+        <Button type="submit" className="customSpacing" disabled={formData.isEditEnabled ? false : !valid} onClick={handleSubmit}>
           {formData.isEditEnabled ? 'Edit' : 'Submit'}
         </Button>
         <Button className="customSpacing" variant="outline-primary" onClick={handleCancel}>{formData.isEditEnabled ? 'Home' : 'Cancel'}</Button>
       </div>
-</div>
+    </div>
   );
 }
 
