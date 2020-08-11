@@ -26,9 +26,9 @@ export class RootDispatcher {
 
     onCancel=()=> this.dispatch({type:"onCancel",payload:{}});
 
-    onEdit = (isEdittable: boolean) => this.dispatch({ type: "onEdit", payload: { isEdittable } });
+    onEdit = (isEditEnabled: boolean) => this.dispatch({ type: "onEdit", payload: { isEditEnabled } });
 
-    onSubmit = (userName: string, email: string, role: string, mobile: string, country: string, isEdittable: boolean) => this.dispatch({ type: "onSubmit", payload: { userName, email, role, mobile, country, isEdittable } });
+    onSubmit = (userName: string, email: string, role: string, mobile: string, country: string, isEditEnabled: boolean) => this.dispatch({ type: "onSubmit", payload: { userName, email, role, mobile, country, isEditEnabled } });
 
 
 

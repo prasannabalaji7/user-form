@@ -40,28 +40,28 @@ export const UserProfile = () => {
 
   const handleSubmit =(e: MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (formData.isEdittable) {
-      rootDispatcher.onEdit(formData.isEdittable);
+    if (formData.isEditEnabled) {
+      rootDispatcher.onEdit(formData.isEditEnabled);
     } else {
-      rootDispatcher.onSubmit(formData.userName, formData.email, formData.role, formData.mobile, formData.country, formData.isEdittable);
+      rootDispatcher.onSubmit(formData.userName, formData.email, formData.role, formData.mobile, formData.country, formData.isEditEnabled);
     }
   }
 
   const handleCancel = () => {
-    if(!formData.isEdittable){
+    if(!formData.isEditEnabled){
       rootDispatcher.onCancel();
     }
   }
 
-  let valid = (!formData.isEdittable && formData.formValid);
-  const { userName, role, country, isEdittable,formValid } = formData;
+  let valid = (!formData.isEditEnabled && formData.formValid);
+  const { userName, role, country, isEditEnabled,formValid } = formData;
   const { userProfileName, userProfileRole, userProfileCountry, file } = formData.profileData;
   const userDetails = { ...formData }
 
   return (
     <div className ="usercontainer">
       <div className="flexParent">
-        <ProfileCard userProfileName={userProfileName} file={file} userProfileRole={userProfileRole} userProfileCountry={userProfileCountry} isEdittable={isEdittable}/>
+        <ProfileCard userProfileName={userProfileName} file={file} userProfileRole={userProfileRole} userProfileCountry={userProfileCountry} isEditEnabled={isEditEnabled}/>
 
         <UserDetailComponent
           handleEmailChange={handleEmailChange}
@@ -72,10 +72,10 @@ export const UserProfile = () => {
           {...userDetails} />
       </div>
       <div className="toolBar">
-        <Button type="submit" className="customSpacing" disabled={formData.isEdittable ?false : !valid} onClick={handleSubmit}>
-          {formData.isEdittable ? 'Edit' : 'Submit'}
+        <Button type="submit" className="customSpacing" disabled={formData.isEditEnabled ?false : !valid} onClick={handleSubmit}>
+          {formData.isEditEnabled ? 'Edit' : 'Submit'}
         </Button>
-        <Button className="customSpacing" variant="outline-primary" onClick={handleCancel}>{formData.isEdittable ? 'Home' : 'Cancel'}</Button>
+        <Button className="customSpacing" variant="outline-primary" onClick={handleCancel}>{formData.isEditEnabled ? 'Home' : 'Cancel'}</Button>
       </div>
 </div>
   );

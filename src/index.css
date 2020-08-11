@@ -16,7 +16,7 @@
   background-color: #fff;
 }
 
-.borderContainer {
+.childContainer {
 	  border-width: .2rem .2rem 0;
     border-radius: 8px 8px 0 0;
     padding: 1rem;
@@ -24,11 +24,14 @@
     border: .2rem solid #ececec;
  }
 
-.borderContainer > .card {
+.childContainer > .card {
       min-width: 15em;
       border:transparent;
 }
 
+.readOnlyMode {
+      min-width: 30em;
+}
 
 .custom-file-input::-webkit-file-upload-button {
 visibility: hidden;
@@ -106,6 +109,9 @@ input[readonly].plainView{
 }
 
 @media screen and (max-width:700px) {
+  .readOnlyMode {
+      min-width: 25em;
+  }
   .usercontainer {
     display: flex;
     flex-direction: column;
@@ -121,4 +127,8 @@ input[readonly].plainView{
     align-items: center;
     align-content: center; 
   }  
+}
+
+.profileReadOnly{
+      min-width: 15em;
 }

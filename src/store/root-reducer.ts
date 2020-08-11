@@ -15,7 +15,7 @@ export interface InitialStateInterface {
     country: string;
     profileData: ProfileData;
     formValid: boolean;
-    isEdittable:boolean;
+    isEditEnabled:boolean;
 }
 
 export const initialState: InitialStateInterface = {
@@ -24,7 +24,7 @@ export const initialState: InitialStateInterface = {
     role: 'User Role',
     mobile: '+9311111111',
     country: 'Afghanistan',
-    isEdittable: false,
+    isEditEnabled: false,
     profileData: {
         userProfileName: 'User Name',
         userProfileRole: 'User Role',
@@ -54,7 +54,7 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (stat
         case "validateSubmit":
             return {...state,formValid: !action.payload.formValid} 
         case "onEdit":
-            return { ...state, isEdittable: !action.payload.isEdittable }
+            return { ...state, isEditEnabled: !action.payload.isEditEnabled }
         case "onSubmit":
             return {
                 ...state,
@@ -64,7 +64,7 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (stat
                     userProfileCountry: action.payload.country,
                     file: "",
                 },
-                isEdittable: !action.payload.isEdittable
+                isEditEnabled: !action.payload.isEditEnabled
             }
         case "onCancel":
             return {...initialState};

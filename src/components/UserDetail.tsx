@@ -10,7 +10,7 @@ interface UserDetailProps {
    role: string;
    mobile:string;
    country:string;
-   isEdittable:boolean;
+   isEditEnabled:boolean;
    formValid:boolean;
    handleUserName: (e: ChangeEvent<HTMLInputElement>)=>void;
    handleRoleChange: (e: ChangeEvent<HTMLInputElement>)=>void;
@@ -25,7 +25,7 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 
 
 	const dispatch = useDispatch();
-	
+	let childContiner = "childContainer";
     const rootDispatcher = new RootDispatcher(dispatch);
     const [valid,setValid] = useState({notEditable:"",
     											readOnly:false,
@@ -33,7 +33,8 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
     											userValid:"",
     											roleValid:"",
     											mobileValid:"",
-    											formValid:false});
+    											formValid:false});	
+    const [editableClass,setEditableClass] = useState("childContainer");
 
 
 	function validate(field:string) {
@@ -101,18 +102,26 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
     useEffect(()=>{validate("mobile");},[props.country]);
 
     useEffect(()=>{
-     	if(props.isEdittable) {
+     	if(props.isEditEnabled) {
      		setValid((state)=>({...state,notEditable:"plainView",readOnly:true}));
      	}else{     		
      		setValid((state)=>({...state,notEditable:"",readOnly:false}));
      	}
 
-     },[props.isEdittable]);
+     },[props.isEditEnabled]);
 
+	useEffect(()=>{
+		if(props.isEditEnabled){
+			setEditableClass(()=>"childContainer readOnlyMode");
+		}else {
+			setEditableClass(()=>"childContainer");
+		}
+
+	},[props.isEditEnabled]);
 
 	return (
 
-		<div className="borderContainer">
+		<div className={editableClass}>
 		<Form >
 			<Form.Group as={Row} controlId="formHorizontalName">
 		    <Form.Label column sm={4}>
@@ -174,7 +183,7 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		      Country 
 		    </Form.Label>
 		    <Col sm={8}>
-		    	{(!props.isEdittable) ? (
+		    	{(!props.isEditEnabled) ? (
 		       <Form.Control
 		        as="select"
 		        className ={valid.notEditable}
