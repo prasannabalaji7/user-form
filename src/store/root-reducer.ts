@@ -14,13 +14,8 @@ export interface InitialStateInterface {
     mobile: string;
     country: string;
     profileData: ProfileData;
-    mobilecode: string;
-    isEdittable: boolean;
-    emailValid: boolean;
-    mobileValid: boolean;
-    userValid: boolean;
-    roleValid: boolean;
     formValid: boolean;
+    isEdittable:boolean;
 }
 
 export const initialState: InitialStateInterface = {
@@ -29,7 +24,6 @@ export const initialState: InitialStateInterface = {
     role: 'User Role',
     mobile: '+9311111111',
     country: 'Afghanistan',
-    mobilecode: "+65",
     isEdittable: false,
     profileData: {
         userProfileName: 'User Name',
@@ -37,10 +31,6 @@ export const initialState: InitialStateInterface = {
         userProfileCountry: 'Afghanistan',
         file: "",
     },
-    emailValid: true,
-    mobileValid: true,
-    userValid: true,
-    roleValid: true,
     formValid:false
 };
 
@@ -61,7 +51,7 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (stat
             return { ...state, mobile: action.payload.mobile}
         case "countryChange":
             return { ...state,country: action.payload.country }
-        case "formValid":
+        case "validateSubmit":
             return {...state,formValid: !action.payload.formValid} 
         case "onEdit":
             return { ...state, isEdittable: !action.payload.isEdittable }
@@ -76,7 +66,9 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (stat
                 },
                 isEdittable: !action.payload.isEdittable
             }
+        case "onCancel":
+            return {...initialState};
         default:
-            return state;
+            return {...state};
     }
 };

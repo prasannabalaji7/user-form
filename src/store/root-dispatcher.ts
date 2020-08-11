@@ -24,6 +24,8 @@ export class RootDispatcher {
 
     validateSubmit = (formValid: boolean)=> this.dispatch({type:"validateSubmit",payload: {formValid}});
 
+    onCancel=()=> this.dispatch({type:"onCancel",payload:{}});
+
     onEdit = (isEdittable: boolean) => this.dispatch({ type: "onEdit", payload: { isEdittable } });
 
     onSubmit = (userName: string, email: string, role: string, mobile: string, country: string, isEdittable: boolean) => this.dispatch({ type: "onSubmit", payload: { userName, email, role, mobile, country, isEdittable } });

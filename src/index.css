@@ -28,6 +28,8 @@
       min-width: 15em;
       border:transparent;
 }
+
+
 .custom-file-input::-webkit-file-upload-button {
 visibility: hidden;
 }
@@ -74,7 +76,7 @@ input[readonly].plainView{
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  align-content: end;
+  align-content: flex-end;
   width: 98%;
   margin: 7px;
 }

@@ -25,6 +25,7 @@ const uploadFiles=(file:any)=>{
     	let isjpg = (filetype.indexOf('jpeg')>-1);
     	if(size<1 &&(ispng || isjpg))
     	{
+
     		fd.append('recfile', file[0]);    		
     	}else{
     		setPopup({modalShow:true,title:"Info",message:"Please upload only image files of 1MB"})
@@ -68,7 +69,7 @@ const uploadFiles=(file:any)=>{
 			{(!props.isEdittable) && 
 			<div>
 			<input style={{ display: "none" }} id="transfer-file" type="file" multiple  onChange={(e)=>handleFiles(e)}/>
-            <Button variant="secondary" onClick={(e: MouseEvent<HTMLInputElement>)=>handleSelect(e)}>Upoad Photo</Button>
+            <Button variant="outline-primary" onClick={(e: MouseEvent<HTMLInputElement>)=>handleSelect(e)}>Upoad Photo</Button>
 		   	</div>
 		   	}
 		  </Card.Body>

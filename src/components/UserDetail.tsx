@@ -17,7 +17,6 @@ interface UserDetailProps {
    handleMobileChange: (e: ChangeEvent<HTMLInputElement>)=>void;
    handleEmailChange : (e: ChangeEvent<HTMLInputElement>)=>void;
    handleCountryChange: (e: ChangeEvent<HTMLInputElement>)=>void;
-   
 }
 
 
@@ -86,31 +85,22 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 	useEffect(()=>{
 		if(!valid.emailValid && !valid.userValid && !valid.roleValid && !valid.mobileValid){
 			rootDispatcher.validateSubmit(valid.formValid);
+		}else {
+			rootDispatcher.validateSubmit(true);
 		}
-
 	},[valid.emailValid,valid.userValid,valid.roleValid,valid.mobileValid]);
 
-    useEffect(()=>{		
-    	validate("userName");
-    },[props.userName]);
+    useEffect(()=>{validate("userName");},[props.userName]);
+
+    useEffect(()=>{validate("email");},[props.email]);
+
+    useEffect(()=>{validate("role");},[props.role]);
+
+    useEffect(()=>{validate("mobile");},[props.mobile]);
+
+    useEffect(()=>{validate("mobile");},[props.country]);
 
     useEffect(()=>{
-    	validate("email");
-    },[props.email]);
-
-     useEffect(()=>{
-     	validate("role");
-    },[props.role]);
-
-     useEffect(()=>{
-     	validate("mobile")
-     },[props.mobile]);
-
-     useEffect(()=>{
-     	validate("mobile")
-     },[props.country]);
-
-     useEffect(()=>{
      	if(props.isEdittable) {
      		setValid((state)=>({...state,notEditable:"plainView",readOnly:true}));
      	}else{     		
@@ -118,8 +108,6 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
      	}
 
      },[props.isEdittable]);
-
-
 
 
 	return (
@@ -190,7 +178,6 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		       <Form.Control
 		        as="select"
 		        className ={valid.notEditable}
-		        readOnly={valid.readOnly}
 		        id="inlineFormCustomSelect"	onChange={props.handleCountryChange}>
 		      {
 
@@ -199,7 +186,8 @@ const UserDetailComponent :React.FC<UserDetailProps> = (props) =>{
 		      	})
 		      }
 		      </Form.Control>):(
-		      <Form.Control className ={valid.notEditable} type="text" placeholder="Name" value={props.country}/>
+		      <Form.Control className ={valid.notEditable} readOnly={valid.readOnly}
+		         type="text" placeholder="Name" value={props.country}/>
 		      )}
 		    </Col>
 		  </Form.Group>		 
