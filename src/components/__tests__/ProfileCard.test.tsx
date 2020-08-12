@@ -1,6 +1,7 @@
 import React from "react";
 import { render, fireEvent, waitForElement } from "@testing-library/react";
 import ProfileCard from "../ProfileCard";
+import '@testing-library/jest-dom';
 
 describe("<ProfileCard />", () => {
     test("should display the values", async () => {
