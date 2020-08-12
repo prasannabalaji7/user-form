@@ -1,8 +1,8 @@
-import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../store/root-dispatcher";
-import { Button, Form, Row, Col } from 'react-bootstrap';
-import { countryData } from '../constants/Constants';
+import { Form, Row, Col } from "react-bootstrap";
+import { countryData } from "../constants/Constants";
 
 export interface UserDetailProps {
 	userName: string;
@@ -19,13 +19,8 @@ export interface UserDetailProps {
 	handleCountryChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-
-
 export const UserDetail: React.FC<UserDetailProps> = (props) => {
-
-
 	const dispatch = useDispatch();
-	let childContiner = "childContainer";
 	const rootDispatcher = new RootDispatcher(dispatch);
 	const [valid, setValid] = useState({
 		notEditable: "",
@@ -34,82 +29,132 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 		userValid: "",
 		roleValid: "",
 		mobileValid: "",
-		formValid: false
+		formValid: false,
 	});
 	const [editableClass, setEditableClass] = useState("childContainer");
 
-
 	function validate(field: string) {
-
 		switch (field) {
 			case "userName":
 				{
-					let lettersOnly = new RegExp('^[a-zA-Z_ ]*$', 'i');
+					let lettersOnly = new RegExp("^[a-zA-Z_ ]*$", "i");
 					if (lettersOnly.test(props.userName)) {
 						setValid((state) => ({ ...state, userValid: "" }));
 					} else {
-						setValid((state) => ({ ...state, userValid: "is-invalid" }));
+						setValid((state) => ({
+							...state,
+							userValid: "is-invalid",
+						}));
 					}
 				}
+				break;
 			case "email":
 				{
-					if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(props.email)) {
+					if (
+						/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+							props.email
+						)
+					) {
 						setValid((state) => ({ ...state, emailValid: "" }));
 					} else {
-						setValid((state) => ({ ...state, emailValid: "is-invalid" }));
+						setValid((state) => ({
+							...state,
+							emailValid: "is-invalid",
+						}));
 					}
 				}
+				break;
 			case "role":
 				{
-					let lettersOnly = new RegExp('^[a-zA-Z_ ]*$', 'i');
+					let lettersOnly = new RegExp("^[a-zA-Z_ ]*$", "i");
 					if (lettersOnly.test(props.role)) {
 						setValid((state) => ({ ...state, roleValid: "" }));
 					} else {
-						setValid((state) => ({ ...state, roleValid: "is-invalid" }));
+						setValid((state) => ({
+							...state,
+							roleValid: "is-invalid",
+						}));
 					}
 				}
+				break;
 			case "mobile":
 				{
-					let mobilecode = countryData.filter(item => item.name === props.country)[0].value;
-					if (/^\+[1-9]{1}[0-9]{7,11}$/.test(props.mobile) && props.mobile.startsWith("+" + mobilecode)) {
+					let mobilecode = countryData.filter(
+						(item) => item.name === props.country
+					)[0].value;
+					if (
+						/^\+[1-9]{1}[0-9]{7,11}$/.test(props.mobile) &&
+						props.mobile.startsWith("+" + mobilecode)
+					) {
 						setValid((state) => ({ ...state, mobileValid: "" }));
 					} else {
-						setValid((state) => ({ ...state, mobileValid: "is-invalid" }));
+						setValid((state) => ({
+							...state,
+							mobileValid: "is-invalid",
+						}));
 					}
-
 				}
-			default:
-				{
-					setValid((state) => ({ ...state }));
-				}
+				break;
+			default: {
+				setValid((state) => ({ ...state }));
+			}
 		}
 	}
 
 	useEffect(() => {
-		if (!valid.emailValid && !valid.userValid && !valid.roleValid && !valid.mobileValid) {
+		if (
+			!valid.emailValid &&
+			!valid.userValid &&
+			!valid.roleValid &&
+			!valid.mobileValid
+		) {
 			rootDispatcher.validateSubmit(valid.formValid);
 		} else {
 			rootDispatcher.validateSubmit(true);
 		}
-	}, [valid.emailValid, valid.userValid, valid.roleValid, valid.mobileValid]);
+	}, [
+		valid.emailValid,
+		valid.userValid,
+		valid.formValid,
+		rootDispatcher,
+		valid.roleValid,
+		valid.mobileValid,
+	]);
 
-	useEffect(() => { validate("userName"); }, [props.userName]);
+	useEffect(() => {
+		validate("userName");
+	}, [props.userName]);
 
-	useEffect(() => { validate("email"); }, [props.email]);
+	useEffect(() => {
+		validate("email");
+	}, [props.email]);
 
-	useEffect(() => { validate("role"); }, [props.role]);
+	useEffect(() => {
+		validate("role");
+	}, [props.role]);
 
-	useEffect(() => { validate("mobile"); }, [props.mobile]);
+	useEffect(() => {
+		validate("mobile");
+	}, [props.mobile]);
 
-	useEffect(() => { validate("mobile"); }, [props.country]);
+	useEffect(() => {
+		validate("mobile");
+	}, [props.country]);
 
 	useEffect(() => {
 		if (props.isEditEnabled) {
-			setValid((state) => ({ ...state, notEditable: "plainView", readOnly: true }));
+			setValid((state) => ({
+				...state,
+				notEditable: "plainView",
+				readOnly: true,
+			}));
 		} else {
-			setValid((state) => ({ ...state, notEditable: "", readOnly: false }));
+			setValid((state) => ({
+				...state,
+				notEditable: "",
+				readOnly: false,
+			}));
 		}
-
 	}, [props.isEditEnabled]);
 
 	useEffect(() => {
@@ -118,93 +163,151 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 		} else {
 			setEditableClass(() => "childContainer");
 		}
-
 	}, [props.isEditEnabled]);
 
 	return (
-
 		<div className={editableClass}>
-			<Form >
+			<Form>
 				<Form.Group as={Row} controlId="formHorizontalName">
 					<Form.Label column sm={4}>
 						Full Name
-		    </Form.Label>
+					</Form.Label>
 					<Col sm={8}>
-
-						<Form.Control className={valid.notEditable + ' ' + valid.userValid} readOnly={valid.readOnly} type="text" placeholder="Name" value={props.userName} onChange={props.handleUserName} required />
-						{(valid.userValid) && <Form.Control.Feedback className="d-block" type="invalid">
-							please enter a valid only alphabets
-	      		</Form.Control.Feedback>
-						}
+						<Form.Control
+							className={
+								valid.notEditable + " " + valid.userValid
+							}
+							readOnly={valid.readOnly}
+							type="text"
+							placeholder="Name"
+							value={props.userName}
+							onChange={props.handleUserName}
+							required
+						/>
+						{valid.userValid && (
+							<Form.Control.Feedback
+								className="d-block"
+								type="invalid"
+							>
+								please enter a valid only alphabets
+							</Form.Control.Feedback>
+						)}
 					</Col>
-
 				</Form.Group>
-
 
 				<Form.Group as={Row} controlId="formHorizontalEmail">
 					<Form.Label column sm={4}>
 						Email
-		    </Form.Label>
+					</Form.Label>
 					<Col sm={8}>
-						<Form.Control className={valid.notEditable + ' ' + valid.emailValid} readOnly={valid.readOnly} type="email" placeholder="Email" value={props.email} onChange={props.handleEmailChange} />
-						{(valid.emailValid) && <Form.Control.Feedback className="d-block" type="invalid">
-							please enter email in email@domain.com format
-	      		</Form.Control.Feedback>
-						}
+						<Form.Control
+							className={
+								valid.notEditable + " " + valid.emailValid
+							}
+							readOnly={valid.readOnly}
+							type="email"
+							placeholder="Email"
+							value={props.email}
+							onChange={props.handleEmailChange}
+						/>
+						{valid.emailValid && (
+							<Form.Control.Feedback
+								className="d-block"
+								type="invalid"
+							>
+								please enter email in email@domain.com format
+							</Form.Control.Feedback>
+						)}
 					</Col>
 				</Form.Group>
 
 				<Form.Group as={Row} controlId="formHorizontalRole">
 					<Form.Label column sm={4}>
 						Role
-		    </Form.Label>
+					</Form.Label>
 					<Col sm={8}>
-						<Form.Control className={valid.notEditable + ' ' + valid.roleValid} readOnly={valid.readOnly} type="text" placeholder="Role" value={props.role} onChange={props.handleRoleChange} />
-						{(valid.roleValid) && <Form.Control.Feedback className="d-block" type="invalid">
-							please enter a valid only alphabets
-	      		</Form.Control.Feedback>
-						}
+						<Form.Control
+							className={
+								valid.notEditable + " " + valid.roleValid
+							}
+							readOnly={valid.readOnly}
+							type="text"
+							placeholder="Role"
+							value={props.role}
+							onChange={props.handleRoleChange}
+						/>
+						{valid.roleValid && (
+							<Form.Control.Feedback
+								className="d-block"
+								type="invalid"
+							>
+								please enter a valid only alphabets
+							</Form.Control.Feedback>
+						)}
 					</Col>
 				</Form.Group>
 
 				<Form.Group as={Row}>
 					<Form.Label column sm={4}>
 						Mobile
-		    </Form.Label>
+					</Form.Label>
 					<Col sm={8}>
-						<Form.Control className={valid.notEditable + ' ' + valid.mobileValid} readOnly={valid.readOnly} type="text" placeholder="Mobile" value={props.mobile} onChange={props.handleMobileChange} />
-						{(valid.mobileValid) && <Form.Control.Feedback className="d-block" type="invalid">
-							please apply correct country code and number
-	      		</Form.Control.Feedback>
-						}
+						<Form.Control
+							className={
+								valid.notEditable + " " + valid.mobileValid
+							}
+							readOnly={valid.readOnly}
+							type="text"
+							placeholder="Mobile"
+							value={props.mobile}
+							onChange={props.handleMobileChange}
+						/>
+						{valid.mobileValid && (
+							<Form.Control.Feedback
+								className="d-block"
+								type="invalid"
+							>
+								please apply correct country code and number
+							</Form.Control.Feedback>
+						)}
 					</Col>
 				</Form.Group>
 
 				<Form.Group as={Row} controlId="formHorizontalCountry">
 					<Form.Label column sm={4}>
 						Country
-		    </Form.Label>
+					</Form.Label>
 					<Col sm={8}>
-						{(!props.isEditEnabled) ? (
+						{!props.isEditEnabled ? (
 							<Form.Control
 								as="select"
 								className={valid.notEditable}
-								id="inlineFormCustomSelect" onChange={props.handleCountryChange}>
-								{
-
-									countryData.map((item) => {
-										return <option key={item.code} value={item.name}>{item.name}</option>
-									})
-								}
-							</Form.Control>) : (
-								<Form.Control className={valid.notEditable} readOnly={valid.readOnly}
-									type="text" placeholder="Name" value={props.country} />
-							)}
+								id="inlineFormCustomSelect"
+								onChange={props.handleCountryChange}
+							>
+								{countryData.map((item) => {
+									return (
+										<option
+											key={item.code}
+											value={item.name}
+										>
+											{item.name}
+										</option>
+									);
+								})}
+							</Form.Control>
+						) : (
+							<Form.Control
+								className={valid.notEditable}
+								readOnly={valid.readOnly}
+								type="text"
+								placeholder="Name"
+								value={props.country}
+							/>
+						)}
 					</Col>
 				</Form.Group>
 			</Form>
 		</div>
-
-
-	)
-}
+	);
+};

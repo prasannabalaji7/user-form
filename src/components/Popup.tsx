@@ -1,7 +1,7 @@
-import React from 'react';
-import {Modal,Button} from 'react-bootstrap';
+import React from "react";
+import { Modal, Button } from "react-bootstrap";
 
-export default function Popup(props:any) {
+export default function Popup({ ...props }) {
   return (
     <Modal
       {...props}
@@ -11,13 +11,11 @@ export default function Popup(props:any) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-         {props.title}        
+          {props.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>
-          {props.message}
-        </p>
+        <p>{props.message}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>

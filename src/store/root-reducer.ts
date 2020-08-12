@@ -15,46 +15,48 @@ export interface InitialStateInterface {
     country: string;
     profileData: ProfileData;
     formValid: boolean;
-    isEditEnabled:boolean;
+    isEditEnabled: boolean;
 }
 
 export const initialState: InitialStateInterface = {
-    userName: 'User Name',
-    email: 'email@domain.com',
-    role: 'User Role',
-    mobile: '+9311111111',
-    country: 'Afghanistan',
+    userName: "User Name",
+    email: "email@domain.com",
+    role: "User Role",
+    mobile: "+9311111111",
+    country: "Afghanistan",
     isEditEnabled: false,
     profileData: {
-        userProfileName: 'User Name',
-        userProfileRole: 'User Role',
-        userProfileCountry: 'Afghanistan',
+        userProfileName: "User Name",
+        userProfileRole: "User Role",
+        userProfileCountry: "Afghanistan",
         file: "",
     },
-    formValid:false
+    formValid: false,
 };
 
 export interface DispatchAction extends Action {
     payload: any;
 }
 
-
-export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (state = initialState, action) => {
+export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
+    state = initialState,
+    action
+) => {
     switch (action.type) {
         case "nameChange":
-            return { ...state, userName: action.payload.userName}
+            return { ...state, userName: action.payload.userName };
         case "emailChange":
-            return { ...state, email: action.payload.email};
+            return { ...state, email: action.payload.email };
         case "roleChange":
-            return { ...state, role: action.payload.role}
+            return { ...state, role: action.payload.role };
         case "numberChange":
-            return { ...state, mobile: action.payload.mobile}
+            return { ...state, mobile: action.payload.mobile };
         case "countryChange":
-            return { ...state,country: action.payload.country }
+            return { ...state, country: action.payload.country };
         case "validateSubmit":
-            return {...state,formValid: !action.payload.formValid} 
+            return { ...state, formValid: !action.payload.formValid };
         case "onEdit":
-            return { ...state, isEditEnabled: !action.payload.isEditEnabled }
+            return { ...state, isEditEnabled: !action.payload.isEditEnabled };
         case "onSubmit":
             return {
                 ...state,
@@ -64,11 +66,11 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (stat
                     userProfileCountry: action.payload.country,
                     file: "",
                 },
-                isEditEnabled: !action.payload.isEditEnabled
-            }
+                isEditEnabled: !action.payload.isEditEnabled,
+            };
         case "onCancel":
-            return {...initialState};
+            return { ...initialState };
         default:
-            return {...state};
+            return { ...state };
     }
 };

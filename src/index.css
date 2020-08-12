@@ -1,53 +1,53 @@
- body{
-	margin:0;
-	padding: 0;
-	width:100%;
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   margin-top: 2em;
-  overflow-x:hidden;
-  overflow-y:scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
-.flexParent{
-	display:flex;
-	flex-direction: row;
+.flexParent {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  margin : 5px;
+  margin: 5px;
   background-color: #fff;
 }
 
 .childContainer {
-	  border-width: .2rem .2rem 0;
-    border-radius: 8px 8px 0 0;
-    padding: 1rem;
-    margin:1rem;
-    border: .2rem solid #ececec;
- }
+  border-width: 0.2rem 0.2rem 0;
+  border-radius: 8px 8px 0 0;
+  padding: 1rem;
+  margin: 1rem;
+  border: 0.2rem solid #ececec;
+}
 
 .childContainer > .card {
-      min-width: 12em;
-      border:transparent;
+  min-width: 12em;
+  border: transparent;
 }
 
 .readOnlyMode {
-      min-width: 30em;
+  min-width: 30em;
 }
 
 .custom-file-input::-webkit-file-upload-button {
-visibility: hidden;
+  visibility: hidden;
 }
 
-input[readonly].plainView{
-  background-color:#fff;
+input[readonly].plainView {
+  background-color: #fff;
   border: none;
   font-size: 1em;
   background-image: none;
   border-color: none;
-  box-shadow:none;
+  box-shadow: none;
 }
 
 .list-group-item.borderless {
   border: 0 none;
-  padding-top:0.2em;
+  padding-top: 0.2em;
 }
 
 .list-group > div:first-child {
@@ -57,7 +57,7 @@ input[readonly].plainView{
 }
 
 .custom-file-input::before {
-  content: 'Upload Profile';
+  content: "Upload Profile";
   background-color: transparent;
   background-image: none;
   border-color: #007bff;
@@ -84,13 +84,13 @@ input[readonly].plainView{
 }
 
 .usercontainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #dadcdc;
-    margin: auto;
-    width: 55%;
-    margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #dadcdc;
+  margin: auto;
+  width: 55%;
+  margin-top: 5%;
 }
 
 .customSpacing {
@@ -98,35 +98,33 @@ input[readonly].plainView{
   margin: 10px;
 }
 
-.error
-{
-    border-bottom: 1px solid #eb516d;
+.error {
+  border-bottom: 1px solid #eb516d;
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width: 800px) {
   .readOnlyMode {
-      min-width: 25em;
+    min-width: 25em;
   }
   .usercontainer {
     display: flex;
     flex-direction: column;
     background-color: #dadcdc;
     width: 100%;
-    margin-top:0;
-}
-.flexParent {  
-  flex-wrap: wrap;  
-}
-  .toolBar
-  {
+    margin-top: 0;
+  }
+  .flexParent {
+    flex-wrap: wrap;
+  }
+  .toolBar {
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
-    align-content: center; 
-  }  
+    align-content: center;
+  }
 }
 
-.profileReadOnly{
-      min-width: 15em;
+.profileReadOnly {
+  min-width: 15em;
 }
