@@ -2,6 +2,7 @@ import React, { MouseEvent, useState, useEffect } from "react";
 //import {fetchComponent} from '../clientApi/fetchComponent';
 import { Card, Button, Image, ListGroupItem, ListGroup } from "react-bootstrap";
 import Popup from "./Popup";
+import {popupMessage} from "../constants/Constants";
 
 export interface ProfileProps {
 	userProfileName: string;
@@ -15,11 +16,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
 	const [imgurl, setImageUrl] = useState(
 		"https://i.stack.imgur.com/YQu5k.png"
 	);
-	const [popup, setPopup] = useState({
-		modalShow: false,
-		title: "",
-		message: "",
-	});
+	const [popup, setPopup] = useState(popupMessage);
 	const [editableClass, setEditableClass] = useState("childContainer");
 
 	const uploadFiles = (file: any) => {
@@ -42,7 +39,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
 		}
 	};
 
-	const handleSelect = (event: any) => {
+	const handleSelect = (event: MouseEvent<HTMLInputElement>) => {
 		event.preventDefault();
 		const fileInput = document.querySelector(
 			"input#transfer-file"

@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../store/root-dispatcher";
 import { Form, Row, Col } from "react-bootstrap";
-import { countryData,userExp,emailExp,mobileExp } from "../constants/Constants";
+import { countryData,userExp,emailExp,mobileExp,ErrorMessage } from "../constants/Constants";
 
 export interface UserDetailProps {
 	userName: string;
@@ -186,7 +186,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 								className="d-block"
 								type="invalid"
 							>
-								please enter a valid only alphabets
+								{ErrorMessage.nameError}
 							</Form.Control.Feedback>
 						)}
 					</Col>
@@ -212,7 +212,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 								className="d-block"
 								type="invalid"
 							>
-								please enter email in email@domain.com format
+								{ErrorMessage.mailError}
 							</Form.Control.Feedback>
 						)}
 					</Col>
@@ -238,7 +238,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 								className="d-block"
 								type="invalid"
 							>
-								please enter a valid only alphabets
+								{ErrorMessage.nameError}
 							</Form.Control.Feedback>
 						)}
 					</Col>
@@ -264,7 +264,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 								className="d-block"
 								type="invalid"
 							>
-								please apply correct country code and number
+								{ErrorMessage.mobileError}
 							</Form.Control.Feedback>
 						)}
 					</Col>
