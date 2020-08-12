@@ -1,7 +1,7 @@
 
 Project User Form
 
-The Project is Built on Reacjs Redux CSS Html Jest
+The Project is Built on React Hooks,TypeScript, Redux CSS ,Jest 
 
 To install the project please follow the steps
 
