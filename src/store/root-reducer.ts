@@ -31,7 +31,7 @@ export const initialState: InitialStateInterface = {
         userProfileCountry: "Afghanistan",
         file: "",
     },
-    formValid: false,
+    formValid: true,
 };
 
 export interface DispatchAction extends Action {

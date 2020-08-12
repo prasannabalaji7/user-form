@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../store/root-dispatcher";
 import { Form, Row, Col } from "react-bootstrap";
-import { countryData } from "../constants/Constants";
+import { countryData,userExp,emailExp,mobileExp } from "../constants/Constants";
 
 export interface UserDetailProps {
 	userName: string;
@@ -37,8 +37,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 		switch (field) {
 			case "userName":
 				{
-					let lettersOnly = new RegExp("^[a-zA-Z_ ]*$", "i");
-					if (lettersOnly.test(props.userName)) {
+					if (userExp.test(props.userName)) {
 						setValid((state) => ({ ...state, userValid: "" }));
 					} else {
 						setValid((state) => ({
@@ -51,7 +50,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 			case "email":
 				{
 					if (
-						/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+						emailExp.test(
 							props.email
 						)
 					) {
@@ -66,8 +65,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 				break;
 			case "role":
 				{
-					let lettersOnly = new RegExp("^[a-zA-Z_ ]*$", "i");
-					if (lettersOnly.test(props.role)) {
+					if (userExp.test(props.role)) {
 						setValid((state) => ({ ...state, roleValid: "" }));
 					} else {
 						setValid((state) => ({
@@ -82,8 +80,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					let mobilecode = countryData.filter(
 						(item) => item.name === props.country
 					)[0].value;
-					if (
-						/^\+[1-9]{1}[0-9]{7,11}$/.test(props.mobile) &&
+					if (mobileExp.test(props.mobile) &&
 						props.mobile.startsWith("+" + mobilecode)
 					) {
 						setValid((state) => ({ ...state, mobileValid: "" }));
@@ -108,9 +105,9 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 			!valid.roleValid &&
 			!valid.mobileValid
 		) {
-			rootDispatcher.validateSubmit(valid.formValid);
+			//rootDispatcher.validateSubmit(valid.formValid);
 		} else {
-			rootDispatcher.validateSubmit(true);
+			//rootDispatcher.validateSubmit(true);
 		}
 	}, [
 		valid.emailValid,

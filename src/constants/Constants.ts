@@ -1271,3 +1271,9 @@ export const countryData=[
     'value': '263'
   }
 ];
+
+export const userExp = new RegExp("^[a-zA-Z_ ]*$", "i");
+
+export const emailExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+export const mobileExp = /^\+[1-9]{1}[0-9]{7,11}$/;
