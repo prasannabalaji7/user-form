@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfileCard /> Snapshot Testing 1`] = `
+<div
+  className="childContainer"
+>
+  <div
+    className="card text-center w-75 card"
+  >
+    <div
+      className="card-body"
+    >
+      <img
+        alt="laugh"
+        className="rounded-circle"
+        id="profilepic"
+        src="https://i.stack.imgur.com/YQu5k.png"
+      />
+      <div
+        className="list-group-flush borderless list-group"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="borderless h5 list-group-item"
+          data-rb-event-key={null}
+          disabled={false}
+          onClick={[Function]}
+        >
+          Test123
+        </div>
+        <div
+          className="borderless list-group-item"
+          data-rb-event-key={null}
+          disabled={false}
+          onClick={[Function]}
+        >
+          TestRole
+        </div>
+        <div
+          className="borderless list-group-item"
+          data-rb-event-key={null}
+          disabled={false}
+          onClick={[Function]}
+        >
+          Singapore
+        </div>
+      </div>
+      <div>
+        <input
+          data-testid="transfer-file"
+          id="transfer-file"
+          multiple={true}
+          onChange={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+          type="file"
+        />
+        <button
+          className="btn btn-outline-primary"
+          data-testid="upload-button"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Upoad Photo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

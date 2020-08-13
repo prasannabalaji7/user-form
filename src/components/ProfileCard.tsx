@@ -87,13 +87,15 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
 							<input
 								style={{ display: 'none' }}
 								id='transfer-file'
+								data-testid="transfer-file"
 								type='file'
 								multiple
 								onChange={(e) => handleFiles(e)}
 							/>
 							<Button
 								variant='outline-primary'
-								onClick={(e: MouseEvent<HTMLInputElement>) =>
+								data-testid='upload-button'
+ 								onClick={(e: MouseEvent<HTMLInputElement>) =>
 									handleSelect(e)
 								}
 							>

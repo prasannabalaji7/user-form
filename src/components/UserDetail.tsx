@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { RootDispatcher } from '../store/root-dispatcher';
 import { Form, Row, Col } from 'react-bootstrap';
 import { countryData, ErrorMessage } from '../constants/Constants';
-import { validatePlainText, validateEmail, validateMobile } from './Validate';
+import { validatePlainText, validateEmail, validateMobile } from '../utils/Validate';
 
 export interface UserDetailProps {
 	userName: string;
@@ -117,6 +117,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 							readOnly={valid.readOnly}
 							type='text'
 							placeholder='Name'
+							data-testId="user-name"						
 							value={props.userName}
 							onChange={props.handleUserName}
 							required
@@ -143,6 +144,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 							}
 							readOnly={valid.readOnly}
 							type='email'
+							data-testId="email"							
 							placeholder='Email'
 							value={props.email}
 							onChange={props.handleEmailChange}
@@ -170,6 +172,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 							readOnly={valid.readOnly}
 							type='text'
 							placeholder='Role'
+							data-testId="role"							
 							value={props.role}
 							onChange={props.handleRoleChange}
 						/>
@@ -194,7 +197,8 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 								valid.notEditable + ' ' + valid.mobileValid
 							}
 							readOnly={valid.readOnly}
-							type='text'
+							type='text'							
+							data-testId="mobile"
 							placeholder='Mobile'
 							value={props.mobile}
 							onChange={props.handleMobileChange}
@@ -220,6 +224,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 								as='select'
 								className={valid.notEditable}
 								id='inlineFormCustomSelect'
+								data-testId="country"
 								onChange={props.handleCountryChange}
 							>
 								{countryData.map((item) => {

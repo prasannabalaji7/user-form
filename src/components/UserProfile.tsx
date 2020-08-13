@@ -95,6 +95,7 @@ export const UserProfile = () => {
       <div className='toolBar'>
         <Button
           type='submit'
+          data-testId="submit"
           className='customSpacing'
           disabled={formData.isEditEnabled ? false : !valid}
           onClick={handleSubmit}
@@ -103,6 +104,7 @@ export const UserProfile = () => {
         </Button>
         <Button
           className='customSpacing'
+          data-testId="cancel"
           variant='outline-primary'
           onClick={handleCancel}
         >
