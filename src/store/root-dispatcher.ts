@@ -1,5 +1,5 @@
-import { Dispatch } from "redux";
-import { DispatchAction } from "./root-reducer";
+import { Dispatch } from 'redux';
+import { DispatchAction } from './root-reducer';
 
 export class RootDispatcher {
     private readonly dispatch: Dispatch<DispatchAction>;
@@ -9,27 +9,27 @@ export class RootDispatcher {
     }
 
     nameChange = (userName: string) =>
-        this.dispatch({ type: "nameChange", payload: { userName } });
+        this.dispatch({ type: 'nameChange', payload: { userName } });
 
     emailChange = (email: string) =>
-        this.dispatch({ type: "emailChange", payload: { email } });
+        this.dispatch({ type: 'emailChange', payload: { email } });
 
     roleChange = (role: string) =>
-        this.dispatch({ type: "roleChange", payload: { role } });
+        this.dispatch({ type: 'roleChange', payload: { role } });
 
     numberChange = (mobile: string) =>
-        this.dispatch({ type: "numberChange", payload: { mobile } });
+        this.dispatch({ type: 'numberChange', payload: { mobile } });
 
     countryChange = (country: string) =>
-        this.dispatch({ type: "countryChange", payload: { country } });
+        this.dispatch({ type: 'countryChange', payload: { country } });
 
     validateSubmit = (formValid: boolean) =>
-        this.dispatch({ type: "validateSubmit", payload: { formValid } });
+        this.dispatch({ type: 'validateSubmit', payload: { formValid } });
 
-    onCancel = () => this.dispatch({ type: "onCancel", payload: {} });
+    onCancel = () => this.dispatch({ type: 'onCancel', payload: {} });
 
     onEdit = (isEditEnabled: boolean) =>
-        this.dispatch({ type: "onEdit", payload: { isEditEnabled } });
+        this.dispatch({ type: 'onEdit', payload: { isEditEnabled } });
 
     onSubmit = (
         userName: string,
@@ -40,7 +40,7 @@ export class RootDispatcher {
         isEditEnabled: boolean
     ) =>
         this.dispatch({
-            type: "onSubmit",
+            type: 'onSubmit',
             payload: { userName, email, role, mobile, country, isEditEnabled },
         });
 }

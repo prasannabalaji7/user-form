@@ -1,4 +1,4 @@
-import { Action, Reducer } from "redux";
+import { Action, Reducer } from 'redux';
 
 export interface ProfileData {
     userProfileName: string;
@@ -19,17 +19,17 @@ export interface InitialStateInterface {
 }
 
 export const initialState: InitialStateInterface = {
-    userName: "User Name",
-    email: "email@domain.com",
-    role: "User Role",
-    mobile: "+9311111111",
-    country: "Afghanistan",
+    userName: 'User Name',
+    email: 'email@domain.com',
+    role: 'User Role',
+    mobile: '+9311111111',
+    country: 'Afghanistan',
     isEditEnabled: false,
     profileData: {
-        userProfileName: "User Name",
-        userProfileRole: "User Role",
-        userProfileCountry: "Afghanistan",
-        file: "",
+        userProfileName: 'User Name',
+        userProfileRole: 'User Role',
+        userProfileCountry: 'Afghanistan',
+        file: '',
     },
     formValid: true,
 };
@@ -43,32 +43,32 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
     action
 ) => {
     switch (action.type) {
-        case "nameChange":
+        case 'nameChange':
             return { ...state, userName: action.payload.userName };
-        case "emailChange":
+        case 'emailChange':
             return { ...state, email: action.payload.email };
-        case "roleChange":
+        case 'roleChange':
             return { ...state, role: action.payload.role };
-        case "numberChange":
+        case 'numberChange':
             return { ...state, mobile: action.payload.mobile };
-        case "countryChange":
+        case 'countryChange':
             return { ...state, country: action.payload.country };
-        case "validateSubmit":
+        case 'validateSubmit':
             return { ...state, formValid: !action.payload.formValid };
-        case "onEdit":
+        case 'onEdit':
             return { ...state, isEditEnabled: !action.payload.isEditEnabled };
-        case "onSubmit":
+        case 'onSubmit':
             return {
                 ...state,
                 profileData: {
                     userProfileName: action.payload.userName,
                     userProfileRole: action.payload.role,
                     userProfileCountry: action.payload.country,
-                    file: "",
+                    file: '',
                 },
                 isEditEnabled: !action.payload.isEditEnabled,
             };
-        case "onCancel":
+        case 'onCancel':
             return { ...initialState };
         default:
             return { ...state };

@@ -1,10 +1,10 @@
-import React, { ChangeEvent, MouseEvent } from "react";
-import ProfileCard from "./ProfileCard";
-import { useSelector, useDispatch } from "react-redux";
-import { InitialStateInterface } from "../store/root-reducer";
-import { UserDetail } from "./UserDetail";
-import RootDispatcher from "../store/root-dispatcher";
-import { Button } from "react-bootstrap";
+import React, { ChangeEvent, MouseEvent } from 'react';
+import ProfileCard from './ProfileCard';
+import { useSelector, useDispatch } from 'react-redux';
+import { InitialStateInterface } from '../store/root-reducer';
+import { UserDetail } from './UserDetail';
+import RootDispatcher from '../store/root-dispatcher';
+import { Button } from 'react-bootstrap';
 
 export const UserProfile = () => {
   const formData = useSelector<InitialStateInterface, InitialStateInterface>(
@@ -67,8 +67,8 @@ export const UserProfile = () => {
   const userDetails = { ...formData };
 
   return (
-    <div className="usercontainer">
-      <div className="flexParent">
+    <div className='usercontainer'>
+      <div className='flexParent'>
         <ProfileCard
           userProfileName={userProfileName}
           file={file}
@@ -86,21 +86,21 @@ export const UserProfile = () => {
           {...userDetails}
         />
       </div>
-      <div className="toolBar">
+      <div className='toolBar'>
         <Button
-          type="submit"
-          className="customSpacing"
+          type='submit'
+          className='customSpacing'
           disabled={formData.isEditEnabled ? false : !valid}
           onClick={handleSubmit}
         >
-          {formData.isEditEnabled ? "Edit" : "Submit"}
+          {formData.isEditEnabled ? 'Edit' : 'Submit'}
         </Button>
         <Button
-          className="customSpacing"
-          variant="outline-primary"
+          className='customSpacing'
+          variant='outline-primary'
           onClick={handleCancel}
         >
-          {formData.isEditEnabled ? "Home" : "Cancel"}
+          {formData.isEditEnabled ? 'Home' : 'Cancel'}
         </Button>
       </div>
     </div>

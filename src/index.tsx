@@ -1,14 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import './index.css';
 import {
 	DispatchAction,
 	rootReducer,
 	InitialStateInterface,
-} from "./store/root-reducer";
-import App from "./App";
+} from './store/root-reducer';
+import App from './App';
 
 const store = createStore<
 	InitialStateInterface,
@@ -21,5 +21,5 @@ ReactDOM.render(
 	<Provider store={store}>
 		<App></App>
 	</Provider>,
-	document.getElementById("root")
+	document.getElementById('root')
 );

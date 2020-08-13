@@ -1,8 +1,13 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { RootDispatcher } from "../store/root-dispatcher";
-import { Form, Row, Col } from "react-bootstrap";
-import { countryData,userExp,emailExp,mobileExp,ErrorMessage } from "../constants/Constants";
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { RootDispatcher } from '../store/root-dispatcher';
+import { Form, Row, Col } from 'react-bootstrap';
+import { countryData, ErrorMessage } from '../constants/Constants';
+import {
+	validatePlainText,
+	validateEmail,
+	validateMobile,
+} from './Validate';
 
 export interface UserDetailProps {
 	userName: string;
@@ -23,132 +28,71 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 	const dispatch = useDispatch();
 	const rootDispatcher = new RootDispatcher(dispatch);
 	const [valid, setValid] = useState({
-		notEditable: "",
+		notEditable: '',
 		readOnly: false,
-		emailValid: "",
-		userValid: "",
-		roleValid: "",
-		mobileValid: "",
+		emailValid: '',
+		userValid: '',
+		roleValid: '',
+		mobileValid: '',
 		formValid: false,
 	});
-	const [editableClass, setEditableClass] = useState("childContainer");
-
-	function validate(field: string) {
-		switch (field) {
-			case "userName":
-				{
-					if (userExp.test(props.userName)) {
-						setValid((state) => ({ ...state, userValid: "" }));
-					} else {
-						setValid((state) => ({
-							...state,
-							userValid: "is-invalid",
-						}));
-					}
-				}
-				break;
-			case "email":
-				{
-					if (
-						emailExp.test(
-							props.email
-						)
-					) {
-						setValid((state) => ({ ...state, emailValid: "" }));
-					} else {
-						setValid((state) => ({
-							...state,
-							emailValid: "is-invalid",
-						}));
-					}
-				}
-				break;
-			case "role":
-				{
-					if (userExp.test(props.role)) {
-						setValid((state) => ({ ...state, roleValid: "" }));
-					} else {
-						setValid((state) => ({
-							...state,
-							roleValid: "is-invalid",
-						}));
-					}
-				}
-				break;
-			case "mobile":
-				{
-					let mobilecode = countryData.filter(
-						(item) => item.name === props.country
-					)[0].value;
-					if (mobileExp.test(props.mobile) &&
-						props.mobile.startsWith("+" + mobilecode)
-					) {
-						setValid((state) => ({ ...state, mobileValid: "" }));
-					} else {
-						setValid((state) => ({
-							...state,
-							mobileValid: "is-invalid",
-						}));
-					}
-				}
-				break;
-			default: {
-				setValid((state) => ({ ...state }));
-			}
-		}
-	}
+	const [editableClass, setEditableClass] = useState('childContainer');
 
 	useEffect(() => {
-		if (
-			!valid.emailValid &&
-			!valid.userValid &&
-			!valid.roleValid &&
-			!valid.mobileValid
-		) {
-			//rootDispatcher.validateSubmit(valid.formValid);
+		if (validatePlainText(props.userName)) {
+			setValid((state) => ({ ...state, userValid: '' }));
 		} else {
-			//rootDispatcher.validateSubmit(true);
+			setValid((state) => ({
+				...state,
+				userValid: 'is-invalid',
+			}));
 		}
-	}, [
-		valid.emailValid,
-		valid.userValid,
-		valid.formValid,
-		rootDispatcher,
-		valid.roleValid,
-		valid.mobileValid,
-	]);
-
-	useEffect(() => {
-		validate("userName");
 	}, [props.userName]);
 
 	useEffect(() => {
-		validate("email");
+		if (validateEmail(props.email)) {
+			setValid((state) => ({ ...state, emailValid: '' }));
+		} else {
+			setValid((state) => ({
+				...state,
+				emailValid: 'is-invalid',
+			}));
+		}
 	}, [props.email]);
 
 	useEffect(() => {
-		validate("role");
+		if (validatePlainText(props.role)) {
+			setValid((state) => ({ ...state, roleValid: '' }));
+		} else {
+			setValid((state) => ({
+				...state,
+				roleValid: 'is-invalid',
+			}));
+		}
 	}, [props.role]);
 
 	useEffect(() => {
-		validate("mobile");
-	}, [props.mobile]);
-
-	useEffect(() => {
-		validate("mobile");
-	}, [props.country]);
+		if (validateMobile(props.mobile, props.country)) {
+			setValid((state) => ({ ...state, mobileValid: '' }));
+		} else {
+			setValid((state) => ({
+				...state,
+				mobileValid: 'is-invalid',
+			}));
+		}
+	}, [props.mobile, props.country]);
 
 	useEffect(() => {
 		if (props.isEditEnabled) {
 			setValid((state) => ({
 				...state,
-				notEditable: "plainView",
+				notEditable: 'plainView',
 				readOnly: true,
 			}));
 		} else {
 			setValid((state) => ({
 				...state,
-				notEditable: "",
+				notEditable: '',
 				readOnly: false,
 			}));
 		}
@@ -156,35 +100,35 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 
 	useEffect(() => {
 		if (props.isEditEnabled) {
-			setEditableClass(() => "childContainer readOnlyMode");
+			setEditableClass(() => 'childContainer readOnlyMode');
 		} else {
-			setEditableClass(() => "childContainer");
+			setEditableClass(() => 'childContainer');
 		}
 	}, [props.isEditEnabled]);
 
 	return (
 		<div className={editableClass}>
 			<Form>
-				<Form.Group as={Row} controlId="formHorizontalName">
+				<Form.Group as={Row} id='formHorizontalName'>
 					<Form.Label column sm={4}>
 						Full Name
 					</Form.Label>
 					<Col sm={8}>
 						<Form.Control
 							className={
-								valid.notEditable + " " + valid.userValid
+								valid.notEditable + ' ' + valid.userValid
 							}
 							readOnly={valid.readOnly}
-							type="text"
-							placeholder="Name"
+							type='text'
+							placeholder='Name'
 							value={props.userName}
 							onChange={props.handleUserName}
 							required
 						/>
 						{valid.userValid && (
 							<Form.Control.Feedback
-								className="d-block"
-								type="invalid"
+								className='d-block'
+								type='invalid'
 							>
 								{ErrorMessage.nameError}
 							</Form.Control.Feedback>
@@ -192,25 +136,25 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					</Col>
 				</Form.Group>
 
-				<Form.Group as={Row} controlId="formHorizontalEmail">
+				<Form.Group as={Row} id='formHorizontalEmail'>
 					<Form.Label column sm={4}>
 						Email
 					</Form.Label>
 					<Col sm={8}>
 						<Form.Control
 							className={
-								valid.notEditable + " " + valid.emailValid
+								valid.notEditable + ' ' + valid.emailValid
 							}
 							readOnly={valid.readOnly}
-							type="email"
-							placeholder="Email"
+							type='email'
+							placeholder='Email'
 							value={props.email}
 							onChange={props.handleEmailChange}
 						/>
 						{valid.emailValid && (
 							<Form.Control.Feedback
-								className="d-block"
-								type="invalid"
+								className='d-block'
+								type='invalid'
 							>
 								{ErrorMessage.mailError}
 							</Form.Control.Feedback>
@@ -218,25 +162,25 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					</Col>
 				</Form.Group>
 
-				<Form.Group as={Row} controlId="formHorizontalRole">
+				<Form.Group as={Row} id='formHorizontalRole'>
 					<Form.Label column sm={4}>
 						Role
 					</Form.Label>
 					<Col sm={8}>
 						<Form.Control
 							className={
-								valid.notEditable + " " + valid.roleValid
+								valid.notEditable + ' ' + valid.roleValid
 							}
 							readOnly={valid.readOnly}
-							type="text"
-							placeholder="Role"
+							type='text'
+							placeholder='Role'
 							value={props.role}
 							onChange={props.handleRoleChange}
 						/>
 						{valid.roleValid && (
 							<Form.Control.Feedback
-								className="d-block"
-								type="invalid"
+								className='d-block'
+								type='invalid'
 							>
 								{ErrorMessage.nameError}
 							</Form.Control.Feedback>
@@ -251,18 +195,18 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					<Col sm={8}>
 						<Form.Control
 							className={
-								valid.notEditable + " " + valid.mobileValid
+								valid.notEditable + ' ' + valid.mobileValid
 							}
 							readOnly={valid.readOnly}
-							type="text"
-							placeholder="Mobile"
+							type='text'
+							placeholder='Mobile'
 							value={props.mobile}
 							onChange={props.handleMobileChange}
 						/>
 						{valid.mobileValid && (
 							<Form.Control.Feedback
-								className="d-block"
-								type="invalid"
+								className='d-block'
+								type='invalid'
 							>
 								{ErrorMessage.mobileError}
 							</Form.Control.Feedback>
@@ -270,16 +214,16 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					</Col>
 				</Form.Group>
 
-				<Form.Group as={Row} controlId="formHorizontalCountry">
+				<Form.Group as={Row} id='formHorizontalCountry'>
 					<Form.Label column sm={4}>
 						Country
 					</Form.Label>
 					<Col sm={8}>
 						{!props.isEditEnabled ? (
 							<Form.Control
-								as="select"
+								as='select'
 								className={valid.notEditable}
-								id="inlineFormCustomSelect"
+								id='inlineFormCustomSelect'
 								onChange={props.handleCountryChange}
 							>
 								{countryData.map((item) => {
@@ -297,8 +241,8 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 							<Form.Control
 								className={valid.notEditable}
 								readOnly={valid.readOnly}
-								type="text"
-								placeholder="Name"
+								type='text'
+								placeholder='Name'
 								value={props.country}
 							/>
 						)}

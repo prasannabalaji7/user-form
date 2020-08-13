@@ -1,16 +1,16 @@
-import React from "react";
-import { Modal, Button } from "react-bootstrap";
+import React from 'react';
+import { Modal, Button } from 'react-bootstrap';
 
 export default function Popup({ ...props }) {
   return (
     <Modal
       {...props}
-      size="sm"
-      aria-labelledby="contained-modal-title-vcenter"
+      size='sm'
+      aria-labelledby='contained-modal-title-vcenter'
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title id='contained-modal-title-vcenter'>
           {props.title}
         </Modal.Title>
       </Modal.Header>

@@ -1286,6 +1286,6 @@ export const ErrorMessage = {
 
 export const popupMessage = {
     modalShow: false,
-    title: "",
-    message: "",
+    title: '',
+    message: '',
   }
