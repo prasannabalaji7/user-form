@@ -7,24 +7,29 @@ export interface ProfileData {
     file: any;
 }
 
-export interface InitialStateInterface {
+export interface UserFormData {
     userName: string;
     email: string;
     role: string;
     mobile: string;
     country: string;
+}
+
+export interface InitialStateInterface {
     profileData: ProfileData;
+    userFormData: UserFormData;
     formValid: boolean;
     isEditEnabled: boolean;
 }
 
 export const initialState: InitialStateInterface = {
-    userName: 'User Name',
-    email: 'email@domain.com',
-    role: 'User Role',
-    mobile: '+9311111111',
-    country: 'Afghanistan',
-    isEditEnabled: false,
+    userFormData: {
+        userName: 'User Name',
+        email: 'email@domain.com',
+        role: 'User Role',
+        mobile: '+9311111111',
+        country: 'Afghanistan',
+    },
     profileData: {
         userProfileName: 'User Name',
         userProfileRole: 'User Role',
@@ -32,6 +37,7 @@ export const initialState: InitialStateInterface = {
         file: '',
     },
     formValid: true,
+    isEditEnabled: false,
 };
 
 export interface DispatchAction extends Action {
@@ -44,15 +50,45 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
 ) => {
     switch (action.type) {
         case 'nameChange':
-            return { ...state, userName: action.payload.userName };
+            return {
+                ...state,
+                userFormData: {
+                    ...state.userFormData,
+                    userName: action.payload.userName,
+                },
+            };
         case 'emailChange':
-            return { ...state, email: action.payload.email };
+            return {
+                ...state,
+                userFormData: {
+                    ...state.userFormData,
+                    email: action.payload.email,
+                },
+            };
         case 'roleChange':
-            return { ...state, role: action.payload.role };
+            return {
+                ...state,
+                userFormData: {
+                    ...state.userFormData,
+                    role: action.payload.role,
+                },
+            };
         case 'numberChange':
-            return { ...state, mobile: action.payload.mobile };
+            return {
+                ...state,
+                userFormData: {
+                    ...state.userFormData,
+                    mobile: action.payload.mobile,
+                },
+            };
         case 'countryChange':
-            return { ...state, country: action.payload.country };
+            return {
+                ...state,
+                userFormData: {
+                    ...state.userFormData,
+                    country: action.payload.country,
+                },
+            };
         case 'validateSubmit':
             return { ...state, formValid: !action.payload.formValid };
         case 'onEdit':

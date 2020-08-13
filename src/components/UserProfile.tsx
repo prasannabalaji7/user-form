@@ -40,11 +40,11 @@ export const UserProfile = () => {
       rootDispatcher.onEdit(formData.isEditEnabled);
     } else {
       rootDispatcher.onSubmit(
-        formData.userName,
-        formData.email,
-        formData.role,
-        formData.mobile,
-        formData.country,
+        formData.userFormData.userName,
+        formData.userFormData.email,
+        formData.userFormData.role,
+        formData.userFormData.mobile,
+        formData.userFormData.country,
         formData.isEditEnabled
       );
     }
@@ -57,14 +57,14 @@ export const UserProfile = () => {
   };
 
   let valid = !formData.isEditEnabled && formData.formValid;
-  const { isEditEnabled } = formData;
+  const { isEditEnabled, formValid } = formData;
   const {
     userProfileName,
     userProfileRole,
     userProfileCountry,
     file,
   } = formData.profileData;
-  const userDetails = { ...formData };
+  const { userName, email, role, country, mobile } = formData.userFormData;
 
   return (
     <div className='usercontainer'>
@@ -83,7 +83,13 @@ export const UserProfile = () => {
           handleUserName={handleUserName}
           handleMobileChange={handleMobileChange}
           handleRoleChange={handleRoleChange}
-          {...userDetails}
+          userName={userName}
+          email={email}
+          role={role}
+          mobile={mobile}
+          country={country}
+          isEditEnabled={isEditEnabled}
+          formValid={formValid}
         />
       </div>
       <div className='toolBar'>

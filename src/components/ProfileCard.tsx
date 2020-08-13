@@ -2,7 +2,7 @@ import React, { MouseEvent, useState, useEffect } from 'react';
 //import {fetchComponent} from '../clientApi/fetchComponent';
 import { Card, Button, Image, ListGroupItem, ListGroup } from 'react-bootstrap';
 import Popup from './Popup';
-import {popupMessage} from '../constants/Constants';
+import { popupMessage } from '../constants/Constants';
 
 export interface ProfileProps {
 	userProfileName: string;

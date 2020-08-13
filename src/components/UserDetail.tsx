@@ -3,11 +3,7 @@ import { useDispatch } from 'react-redux';
 import { RootDispatcher } from '../store/root-dispatcher';
 import { Form, Row, Col } from 'react-bootstrap';
 import { countryData, ErrorMessage } from '../constants/Constants';
-import {
-	validatePlainText,
-	validateEmail,
-	validateMobile,
-} from './Validate';
+import { validatePlainText, validateEmail, validateMobile } from './Validate';
 
 export interface UserDetailProps {
 	userName: string;
