@@ -2,7 +2,7 @@ import React, { MouseEvent, useState, useEffect } from 'react';
 //import {fetchComponent} from '../clientApi/fetchComponent';
 import { Card, Button, Image, ListGroupItem, ListGroup } from 'react-bootstrap';
 import Popup from './Popup';
-import { popupMessage } from '../constants/Constants';
+import { popupMessage,imgUrl } from '../constants/Constants';
 
 export interface ProfileProps {
 	userProfileName: string;
@@ -14,7 +14,7 @@ export interface ProfileProps {
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
 	const [imgurl, setImageUrl] = useState(
-		'https://i.stack.imgur.com/YQu5k.png'
+	imgUrl
 	);
 	const [popup, setPopup] = useState(popupMessage);
 	const [editableClass, setEditableClass] = useState('childContainer');

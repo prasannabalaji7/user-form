@@ -1,3 +1,23 @@
+export const userExp = new RegExp('^[a-zA-Z_ ]*$', 'i');
+
+export const emailExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+export const mobileExp = /^\+[1-9]{1}[0-9]{7,11}$/;
+
+export const ErrorMessage = {
+  nameError: 'please enter only alphabets',
+  mailError: 'please enter email in email@domain.com format',
+  mobileError: 'please apply correct country code and number ',
+};
+
+export const popupMessage = {
+    modalShow: false,
+    title: '',
+    message: '',
+  }
+
+export const imgUrl = 'https://i.stack.imgur.com/YQu5k.png';
+
 export const countryData = [
   {
     name: 'Afghanistan',
@@ -1271,21 +1291,3 @@ export const countryData = [
     value: '263',
   },
 ];
-
-export const userExp = new RegExp('^[a-zA-Z_ ]*$', 'i');
-
-export const emailExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-export const mobileExp = /^\+[1-9]{1}[0-9]{7,11}$/;
-
-export const ErrorMessage = {
-  nameError: 'please enter only alphabets',
-  mailError: 'please enter email in email@domain.com format',
-  mobileError: 'please apply correct country code and number ',
-};
-
-export const popupMessage = {
-    modalShow: false,
-    title: '',
-    message: '',
-  }
