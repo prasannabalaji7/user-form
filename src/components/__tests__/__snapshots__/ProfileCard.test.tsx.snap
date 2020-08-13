@@ -45,29 +45,6 @@ exports[`<ProfileCard /> Snapshot Testing 1`] = `
           Singapore
         </div>
       </div>
-      <div>
-        <input
-          data-testid="transfer-file"
-          id="transfer-file"
-          multiple={true}
-          onChange={[Function]}
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-          type="file"
-        />
-        <button
-          className="btn btn-outline-primary"
-          data-testid="upload-button"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Upoad Photo
-        </button>
-      </div>
     </div>
   </div>
 </div>

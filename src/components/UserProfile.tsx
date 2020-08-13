@@ -35,46 +35,34 @@ export const UserProfile = () => {
   };
 
   const handleSubmit = (e: MouseEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (formData.isEditEnabled) {
-      rootDispatcher.onEdit(formData.isEditEnabled);
-    } else {
-      rootDispatcher.onSubmit(
-        formData.userFormData.userName,
-        formData.userFormData.email,
-        formData.userFormData.role,
-        formData.userFormData.mobile,
-        formData.userFormData.country,
-        formData.isEditEnabled
-      );
-    }
+    rootDispatcher.onSubmit(
+      formData.userFormData.userName,
+      formData.userFormData.email,
+      formData.userFormData.role,
+      formData.userFormData.mobile,
+      formData.userFormData.country,
+      formData.editBtnVisible
+    );
   };
 
+  const handleEdit = (e: MouseEvent<HTMLInputElement>) => {
+    rootDispatcher.onEdit(formData.editBtnVisible);
+  };
   const handleCancel = () => {
-    if (!formData.isEditEnabled) {
+    if (!formData.editBtnVisible) {
       rootDispatcher.onCancel();
     }
   };
 
-  let valid = !formData.isEditEnabled && formData.formValid;
-  const { isEditEnabled, formValid } = formData;
-  const {
-    userProfileName,
-    userProfileRole,
-    userProfileCountry,
-    file,
-  } = formData.profileData;
-  const { userName, email, role, country, mobile } = formData.userFormData;
+  const valid = !formData.editBtnVisible && formData.formValid;
+  const { editBtnVisible, formValid } = formData;
 
   return (
     <div className='usercontainer'>
       <div className='flexParent'>
         <ProfileCard
-          userProfileName={userProfileName}
-          file={file}
-          userProfileRole={userProfileRole}
-          userProfileCountry={userProfileCountry}
-          isEditEnabled={isEditEnabled}
+          editBtnVisible={editBtnVisible}
+          {...formData.profileData}
         />
 
         <UserDetail
@@ -83,32 +71,40 @@ export const UserProfile = () => {
           handleUserName={handleUserName}
           handleMobileChange={handleMobileChange}
           handleRoleChange={handleRoleChange}
-          userName={userName}
-          email={email}
-          role={role}
-          mobile={mobile}
-          country={country}
-          isEditEnabled={isEditEnabled}
+          editBtnVisible={editBtnVisible}
           formValid={formValid}
+          {...formData.userFormData}
         />
       </div>
       <div className='toolBar'>
+        {formData.editBtnVisible ? (
+          <Button
+            type='submit'
+            data-testId='submit'
+            className='customSpacing'
+            disabled={formData.editBtnVisible ? false : !valid}
+            onClick={handleEdit}
+          >
+            Edit
+          </Button>
+        ) : (
+          <Button
+            type='submit'
+            data-testId='submit'
+            className='customSpacing'
+            disabled={formData.editBtnVisible ? false : !valid}
+            onClick={handleSubmit}
+          >
+            Submit
+          </Button>
+        )}
         <Button
-          type='submit'
-          data-testId="submit"
           className='customSpacing'
-          disabled={formData.isEditEnabled ? false : !valid}
-          onClick={handleSubmit}
-        >
-          {formData.isEditEnabled ? 'Edit' : 'Submit'}
-        </Button>
-        <Button
-          className='customSpacing'
-          data-testId="cancel"
+          data-testId='cancel'
           variant='outline-primary'
           onClick={handleCancel}
         >
-          {formData.isEditEnabled ? 'Home' : 'Cancel'}
+          {formData.editBtnVisible ? 'Home' : 'Cancel'}
         </Button>
       </div>
     </div>

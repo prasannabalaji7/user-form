@@ -1,65 +1,26 @@
-import React, { MouseEvent, useState, useEffect } from 'react';
-//import {fetchComponent} from '../clientApi/fetchComponent';
-import { Card, Button, Image, ListGroupItem, ListGroup } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Card, Image, ListGroupItem, ListGroup } from 'react-bootstrap';
 import Popup from './Popup';
-import { popupMessage,imgUrl } from '../constants/Constants';
+import { popupMessage, imgUrl } from '../constants/Constants';
 
 export interface ProfileProps {
 	userProfileName: string;
 	userProfileRole: string;
 	userProfileCountry: string;
-	isEditEnabled: boolean;
-	file: any;
+	editBtnVisible: boolean;
 }
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
-	const [imgurl, setImageUrl] = useState(
-	imgUrl
-	);
 	const [popup, setPopup] = useState(popupMessage);
 	const [editableClass, setEditableClass] = useState('childContainer');
 
-	const uploadFiles = (file: any) => {
-		var fd = new FormData();
-		if (file[0]) {
-			let size = file[0].size / 1000000;
-			let filetype = file[0].type;
-			let ispng = filetype.indexOf('png') > -1;
-			let isjpg = filetype.indexOf('jpeg') > -1;
-			if (size < 1 && (ispng || isjpg)) {
-				fd.append('recfile', file[0]);
-			} else {
-				setPopup({
-					modalShow: true,
-					title: 'Info',
-					message: 'Please upload only image files of 1MB',
-				});
-				return false;
-			}
-		}
-	};
-
-	const handleSelect = (event: MouseEvent<HTMLInputElement>) => {
-		event.preventDefault();
-		const fileInput = document.querySelector(
-			'input#transfer-file'
-		) as HTMLElement;
-		if (fileInput) {
-			fileInput.click();
-		}
-	};
-
-	const handleFiles = (e: any) => {
-		uploadFiles(e.target.files);
-	};
-
 	useEffect(() => {
-		if (props.isEditEnabled) {
+		if (props.editBtnVisible) {
 			setEditableClass(() => 'childContainer profileReadOnly');
 		} else {
 			setEditableClass(() => 'childContainer');
 		}
-	}, [props.isEditEnabled]);
+	}, [props.editBtnVisible]);
 
 	return (
 		<div className={editableClass}>
@@ -67,7 +28,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
 				<Card.Body>
 					<Image
 						id='profilepic'
-						src={imgurl}
+						src={imgUrl}
 						alt='laugh'
 						roundedCircle
 					/>
@@ -82,27 +43,6 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
 							{props.userProfileCountry}
 						</ListGroupItem>
 					</ListGroup>
-					{!props.isEditEnabled && (
-						<div>
-							<input
-								style={{ display: 'none' }}
-								id='transfer-file'
-								data-testid="transfer-file"
-								type='file'
-								multiple
-								onChange={(e) => handleFiles(e)}
-							/>
-							<Button
-								variant='outline-primary'
-								data-testid='upload-button'
- 								onClick={(e: MouseEvent<HTMLInputElement>) =>
-									handleSelect(e)
-								}
-							>
-								Upoad Photo
-							</Button>
-						</div>
-					)}
 				</Card.Body>
 			</Card>
 			<Popup

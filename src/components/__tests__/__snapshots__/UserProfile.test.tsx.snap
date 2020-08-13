@@ -51,29 +51,6 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
               Afghanistan
             </div>
           </div>
-          <div>
-            <input
-              data-testid="transfer-file"
-              id="transfer-file"
-              multiple={true}
-              onChange={[Function]}
-              style={
-                Object {
-                  "display": "none",
-                }
-              }
-              type="file"
-            />
-            <button
-              className="btn btn-outline-primary"
-              data-testid="upload-button"
-              disabled={false}
-              onClick={[Function]}
-              type="button"
-            >
-              Upoad Photo
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -1479,7 +1456,7 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
     <button
       className="customSpacing btn btn-primary"
       data-testId="submit"
-      disabled={false}
+      disabled={true}
       onClick={[Function]}
       type="submit"
     >

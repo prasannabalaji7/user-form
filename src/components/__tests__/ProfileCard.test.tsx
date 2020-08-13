@@ -6,26 +6,29 @@ import renderer from 'react-test-renderer';
 
 describe('<ProfileCard />', () => {
     test('should display the values', async () => {
-        const { getByText } = render(<ProfileCard userProfileName='Test123' file='' userProfileRole='TestRole' userProfileCountry='Singapore' isEditEnabled={false} />)
+        const { getByText } = render(
+            <ProfileCard
+                userProfileName='Test123'
+                userProfileRole='TestRole'
+                userProfileCountry='Singapore'
+                editBtnVisible={false}
+            />
+        );
         expect(getByText('Test123')).toBeInTheDocument();
         expect(getByText('TestRole')).toBeInTheDocument();
         expect(getByText('Singapore')).toBeInTheDocument();
     });
-    test('Select File to Be uploaded', async () => {
-        const { getByTestId } = render(<ProfileCard userProfileName='Test123' file='' userProfileRole='TestRole' userProfileCountry='Singapore' isEditEnabled={false} />)
-        fireEvent.change(getByTestId('transfer-file'), {
-            target: {files: [{type: 'png'}]}
-        })
-    });
-    test('Click Upload Button', async () => {
-        const { getByTestId } = render(<ProfileCard userProfileName='Test123' file='' userProfileRole='TestRole' userProfileCountry='Singapore' isEditEnabled={false} />)
-        fireEvent.click(getByTestId('upload-button'), undefined)
-    });
-
     test('Snapshot Testing', () => {
         const tree = renderer
-          .create(<ProfileCard userProfileName='Test123' file='' userProfileRole='TestRole' userProfileCountry='Singapore' isEditEnabled={false} />)
-          .toJSON();
+            .create(
+                <ProfileCard
+                    userProfileName='Test123'
+                    userProfileRole='TestRole'
+                    userProfileCountry='Singapore'
+                    editBtnVisible={false}
+                />
+            )
+            .toJSON();
         expect(tree).toMatchSnapshot();
     });
-}); 
+});

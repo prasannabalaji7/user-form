@@ -28,8 +28,8 @@ export class RootDispatcher {
 
     onCancel = () => this.dispatch({ type: 'onCancel', payload: {} });
 
-    onEdit = (isEditEnabled: boolean) =>
-        this.dispatch({ type: 'onEdit', payload: { isEditEnabled } });
+    onEdit = (editBtnVisible: boolean) =>
+        this.dispatch({ type: 'onEdit', payload: { editBtnVisible } });
 
     onSubmit = (
         userName: string,
@@ -37,11 +37,11 @@ export class RootDispatcher {
         role: string,
         mobile: string,
         country: string,
-        isEditEnabled: boolean
+        editBtnVisible: boolean
     ) =>
         this.dispatch({
             type: 'onSubmit',
-            payload: { userName, email, role, mobile, country, isEditEnabled },
+            payload: { userName, email, role, mobile, country, editBtnVisible },
         });
 }
 

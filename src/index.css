@@ -23,7 +23,7 @@ body {
   border: 0.2rem solid #ececec;
 }
 
-.childContainer > .card {
+.childContainer > .card{
   min-width: 12em;
   border: transparent;
 }
@@ -119,9 +119,7 @@ input[readonly].plainView {
   .toolBar {
     display: flex;
     width: 100%;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    justify-content: space-evenly;
   }
 }
 

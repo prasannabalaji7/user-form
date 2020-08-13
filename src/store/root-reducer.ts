@@ -4,7 +4,6 @@ export interface ProfileData {
     userProfileName: string;
     userProfileRole: string;
     userProfileCountry: string;
-    file: any;
 }
 
 export interface UserFormData {
@@ -19,7 +18,7 @@ export interface InitialStateInterface {
     profileData: ProfileData;
     userFormData: UserFormData;
     formValid: boolean;
-    isEditEnabled: boolean;
+    editBtnVisible: boolean;
 }
 
 export const initialState: InitialStateInterface = {
@@ -34,10 +33,9 @@ export const initialState: InitialStateInterface = {
         userProfileName: 'User Name',
         userProfileRole: 'User Role',
         userProfileCountry: 'Afghanistan',
-        file: '',
     },
-    formValid: true,
-    isEditEnabled: false,
+    formValid: false,
+    editBtnVisible: false,
 };
 
 export interface DispatchAction extends Action {
@@ -92,7 +90,7 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
         case 'validateSubmit':
             return { ...state, formValid: !action.payload.formValid };
         case 'onEdit':
-            return { ...state, isEditEnabled: !action.payload.isEditEnabled };
+            return { ...state, editBtnVisible: !action.payload.editBtnVisible };
         case 'onSubmit':
             return {
                 ...state,
@@ -100,9 +98,8 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
                     userProfileName: action.payload.userName,
                     userProfileRole: action.payload.role,
                     userProfileCountry: action.payload.country,
-                    file: '',
                 },
-                isEditEnabled: !action.payload.isEditEnabled,
+                editBtnVisible: !action.payload.editBtnVisible,
             };
         case 'onCancel':
             return { ...initialState };

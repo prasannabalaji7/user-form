@@ -3,7 +3,11 @@ import { useDispatch } from 'react-redux';
 import { RootDispatcher } from '../store/root-dispatcher';
 import { Form, Row, Col } from 'react-bootstrap';
 import { countryData, ErrorMessage } from '../constants/Constants';
-import { validatePlainText, validateEmail, validateMobile } from '../utils/Validate';
+import {
+	validatePlainText,
+	validateEmail,
+	validateMobile,
+} from '../utils/Validate';
 
 export interface UserDetailProps {
 	userName: string;
@@ -11,7 +15,7 @@ export interface UserDetailProps {
 	role: string;
 	mobile: string;
 	country: string;
-	isEditEnabled: boolean;
+	editBtnVisible: boolean;
 	formValid: boolean;
 	handleUserName: (e: ChangeEvent<HTMLInputElement>) => void;
 	handleRoleChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -30,7 +34,6 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 		userValid: '',
 		roleValid: '',
 		mobileValid: '',
-		formValid: false,
 	});
 	const [editableClass, setEditableClass] = useState('childContainer');
 
@@ -79,7 +82,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 	}, [props.mobile, props.country]);
 
 	useEffect(() => {
-		if (props.isEditEnabled) {
+		if (props.editBtnVisible) {
 			setValid((state) => ({
 				...state,
 				notEditable: 'plainView',
@@ -92,15 +95,28 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 				readOnly: false,
 			}));
 		}
-	}, [props.isEditEnabled]);
+	}, [props.editBtnVisible]);
 
 	useEffect(() => {
-		if (props.isEditEnabled) {
+		if (props.editBtnVisible) {
 			setEditableClass(() => 'childContainer readOnlyMode');
 		} else {
 			setEditableClass(() => 'childContainer');
 		}
-	}, [props.isEditEnabled]);
+	}, [props.editBtnVisible]);
+
+	useEffect(() => {
+		if (
+			!valid.emailValid &&
+			!valid.userValid &&
+			!valid.mobileValid &&
+			!valid.roleValid
+		) {
+			rootDispatcher.validateSubmit(false);
+		} else {
+			rootDispatcher.validateSubmit(true);
+		}
+	}, [valid.emailValid, valid.userValid, valid.mobileValid, valid.roleValid]);
 
 	return (
 		<div className={editableClass}>
@@ -117,7 +133,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 							readOnly={valid.readOnly}
 							type='text'
 							placeholder='Name'
-							data-testId="user-name"						
+							data-testId='user-name'
 							value={props.userName}
 							onChange={props.handleUserName}
 							required
@@ -144,7 +160,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 							}
 							readOnly={valid.readOnly}
 							type='email'
-							data-testId="email"							
+							data-testId='email'
 							placeholder='Email'
 							value={props.email}
 							onChange={props.handleEmailChange}
@@ -172,7 +188,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 							readOnly={valid.readOnly}
 							type='text'
 							placeholder='Role'
-							data-testId="role"							
+							data-testId='role'
 							value={props.role}
 							onChange={props.handleRoleChange}
 						/>
@@ -197,8 +213,8 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 								valid.notEditable + ' ' + valid.mobileValid
 							}
 							readOnly={valid.readOnly}
-							type='text'							
-							data-testId="mobile"
+							type='text'
+							data-testId='mobile'
 							placeholder='Mobile'
 							value={props.mobile}
 							onChange={props.handleMobileChange}
@@ -219,12 +235,12 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 						Country
 					</Form.Label>
 					<Col sm={8}>
-						{!props.isEditEnabled ? (
+						{!props.editBtnVisible ? (
 							<Form.Control
 								as='select'
 								className={valid.notEditable}
 								id='inlineFormCustomSelect'
-								data-testId="country"
+								data-testId='country'
 								onChange={props.handleCountryChange}
 							>
 								{countryData.map((item) => {
