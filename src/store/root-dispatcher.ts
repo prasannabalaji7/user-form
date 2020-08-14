@@ -11,37 +11,44 @@ export class RootDispatcher {
     nameChange = (userName: string) =>
         this.dispatch({ type: 'nameChange', payload: { userName } });
 
-    emailChange = (email: string) =>
-        this.dispatch({ type: 'emailChange', payload: { email } });
+    emailChange = (userEmail: string) =>
+        this.dispatch({ type: 'emailChange', payload: { userEmail } });
 
-    roleChange = (role: string) =>
-        this.dispatch({ type: 'roleChange', payload: { role } });
+    roleChange = (userRole: string) =>
+        this.dispatch({ type: 'roleChange', payload: { userRole } });
 
-    numberChange = (mobile: string) =>
-        this.dispatch({ type: 'numberChange', payload: { mobile } });
+    numberChange = (userMobile: string) =>
+        this.dispatch({ type: 'numberChange', payload: { userMobile } });
 
-    countryChange = (country: string) =>
-        this.dispatch({ type: 'countryChange', payload: { country } });
+    countryChange = (userCountry: string) =>
+        this.dispatch({ type: 'countryChange', payload: { userCountry } });
 
     validateSubmit = (formValid: boolean) =>
         this.dispatch({ type: 'validateSubmit', payload: { formValid } });
 
     onCancel = () => this.dispatch({ type: 'onCancel', payload: {} });
 
-    onEdit = (editBtnVisible: boolean) =>
-        this.dispatch({ type: 'onEdit', payload: { editBtnVisible } });
+    onEdit = (isEditBtnVisible: boolean) =>
+        this.dispatch({ type: 'onEdit', payload: { isEditBtnVisible } });
 
     onSubmit = (
         userName: string,
-        email: string,
-        role: string,
-        mobile: string,
-        country: string,
-        editBtnVisible: boolean
+        userEmail: string,
+        userRole: string,
+        userMobile: string,
+        userCountry: string,
+        isEditBtnVisible: boolean
     ) =>
         this.dispatch({
             type: 'onSubmit',
-            payload: { userName, email, role, mobile, country, editBtnVisible },
+            payload: {
+                userName,
+                userEmail,
+                userRole,
+                userMobile,
+                userCountry,
+                isEditBtnVisible,
+            },
         });
 }
 

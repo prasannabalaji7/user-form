@@ -7,13 +7,13 @@ describe('rootReducer', () => {
                 type: 'onSubmit',
                 payload: {
                     userName: 'New User Name',
-                    role: 'New Role',
-                    country: 'New Country',
+                    userRole: 'New Role',
+                    userCountry: 'New Country',
                 },
             })
         ).toEqual({
             ...initialState,
-            editBtnVisible: true,
+            isEditBtnVisible: true,
             profileData: {
                 userProfileName: 'New User Name',
                 userProfileRole: 'New Role',

@@ -73,7 +73,7 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
             className="col-sm-8"
           >
             <input
-              className="  form-control"
+              className="in-valid form-control"
               data-testId="user-name"
               onChange={[Function]}
               placeholder="Name"
@@ -82,7 +82,6 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
               type="text"
               value="User Name"
             />
-            
           </div>
         </div>
         <div
@@ -98,15 +97,14 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
             className="col-sm-8"
           >
             <input
-              className="  form-control"
-              data-testId="email"
+              className="in-valid form-control"
+              data-testId="userEmail"
               onChange={[Function]}
               placeholder="Email"
               readOnly={false}
-              type="email"
-              value="email@domain.com"
+              type="userEmail"
+              value="userEmail@domain.com"
             />
-            
           </div>
         </div>
         <div
@@ -122,15 +120,14 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
             className="col-sm-8"
           >
             <input
-              className="  form-control"
-              data-testId="role"
+              className="in-valid form-control"
+              data-testId="userRole"
               onChange={[Function]}
               placeholder="Role"
               readOnly={false}
               type="text"
               value="User Role"
             />
-            
           </div>
         </div>
         <div
@@ -145,15 +142,14 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
             className="col-sm-8"
           >
             <input
-              className="  form-control"
-              data-testId="mobile"
+              className="in-valid form-control"
+              data-testId="userMobile"
               onChange={[Function]}
               placeholder="Mobile"
               readOnly={false}
               type="text"
               value="+9311111111"
             />
-            
           </div>
         </div>
         <div
@@ -170,7 +166,7 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
           >
             <select
               className="form-control"
-              data-testId="country"
+              data-testId="userCountry"
               id="inlineFormCustomSelect"
               onChange={[Function]}
             >

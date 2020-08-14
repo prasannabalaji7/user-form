@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { RootDispatcher } from '../store/root-dispatcher';
 import { Form, Row, Col } from 'react-bootstrap';
@@ -11,11 +12,11 @@ import {
 
 export interface UserDetailProps {
 	userName: string;
-	email: string;
-	role: string;
-	mobile: string;
-	country: string;
-	editBtnVisible: boolean;
+	userEmail: string;
+	userRole: string;
+	userMobile: string;
+	userCountry: string;
+	isEditBtnVisible: boolean;
 	formValid: boolean;
 	handleUserName: (e: ChangeEvent<HTMLInputElement>) => void;
 	handleRoleChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -25,98 +26,95 @@ export interface UserDetailProps {
 }
 
 export const UserDetail: React.FC<UserDetailProps> = (props) => {
+	const {
+		userName,
+		userEmail,
+		userRole,
+		userMobile,
+		userCountry,
+		isEditBtnVisible,
+		formValid,
+	} = props;
+
 	const dispatch = useDispatch();
 	const rootDispatcher = new RootDispatcher(dispatch);
 	const [valid, setValid] = useState({
 		notEditable: '',
 		readOnly: false,
-		emailValid: '',
-		userValid: '',
-		roleValid: '',
-		mobileValid: '',
+		isValidEmail: true,
+		isValidUser: true,
+		isValidRole: true,
+		isValidMobile: true,
 	});
-	const [editableClass, setEditableClass] = useState('childContainer');
+
+	const editableClass = classNames('childContainer', {
+		readOnlyMode: isEditBtnVisible,
+	});
+	const fieldClass = classNames('', {
+		plainView: isEditBtnVisible,
+	});
+
+	const userValidClass = classNames(fieldClass, {
+		'in-valid': valid.isValidUser,
+	});
+
+	const emailValidClass = classNames(fieldClass, {
+		'in-valid': valid.isValidEmail,
+	});
+
+	const roleValidClass = classNames(fieldClass, {
+		'in-valid': valid.isValidRole,
+	});
+
+	const mobileValidClass = classNames(fieldClass, {
+		'in-valid': valid.isValidMobile,
+	});
 
 	useEffect(() => {
-		if (validatePlainText(props.userName)) {
-			setValid((state) => ({ ...state, userValid: '' }));
-		} else {
-			setValid((state) => ({
-				...state,
-				userValid: 'is-invalid',
-			}));
-		}
-	}, [props.userName]);
+		setValid((state) => ({
+			...state,
+			isValidUser: validatePlainText(userName),
+		}));
+	}, [userName]);
 
 	useEffect(() => {
-		if (validateEmail(props.email)) {
-			setValid((state) => ({ ...state, emailValid: '' }));
-		} else {
-			setValid((state) => ({
-				...state,
-				emailValid: 'is-invalid',
-			}));
-		}
-	}, [props.email]);
+		setValid((state) => ({
+			...state,
+			isValidEmail: validateEmail(userEmail),
+		}));
+	}, [userEmail]);
 
 	useEffect(() => {
-		if (validatePlainText(props.role)) {
-			setValid((state) => ({ ...state, roleValid: '' }));
-		} else {
-			setValid((state) => ({
-				...state,
-				roleValid: 'is-invalid',
-			}));
-		}
-	}, [props.role]);
+		setValid((state) => ({
+			...state,
+			isValidRole: validatePlainText(userRole),
+		}));
+	}, [userRole]);
 
 	useEffect(() => {
-		if (validateMobile(props.mobile, props.country)) {
-			setValid((state) => ({ ...state, mobileValid: '' }));
-		} else {
-			setValid((state) => ({
-				...state,
-				mobileValid: 'is-invalid',
-			}));
-		}
-	}, [props.mobile, props.country]);
-
-	useEffect(() => {
-		if (props.editBtnVisible) {
-			setValid((state) => ({
-				...state,
-				notEditable: 'plainView',
-				readOnly: true,
-			}));
-		} else {
-			setValid((state) => ({
-				...state,
-				notEditable: '',
-				readOnly: false,
-			}));
-		}
-	}, [props.editBtnVisible]);
-
-	useEffect(() => {
-		if (props.editBtnVisible) {
-			setEditableClass(() => 'childContainer readOnlyMode');
-		} else {
-			setEditableClass(() => 'childContainer');
-		}
-	}, [props.editBtnVisible]);
+		setValid((state) => ({
+			...state,
+			isValidMobile: validateMobile(userMobile, userCountry),
+		}));
+	}, [userMobile, userCountry]);
 
 	useEffect(() => {
 		if (
-			!valid.emailValid &&
-			!valid.userValid &&
-			!valid.mobileValid &&
-			!valid.roleValid
+			valid.isValidEmail &&
+			valid.isValidUser &&
+			valid.isValidMobile &&
+			valid.isValidRole
 		) {
 			rootDispatcher.validateSubmit(false);
 		} else {
 			rootDispatcher.validateSubmit(true);
 		}
-	}, [valid.emailValid, valid.userValid, valid.mobileValid, valid.roleValid]);
+	}, [
+		valid.isValidEmail,
+		valid.isValidUser,
+		valid.isValidMobile,
+		valid.isValidRole,
+	]);
 
 	return (
 		<div className={editableClass}>
@@ -127,18 +125,16 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					</Form.Label>
 					<Col sm={8}>
 						<Form.Control
-							className={
-								valid.notEditable + ' ' + valid.userValid
-							}
-							readOnly={valid.readOnly}
+							className={userValidClass}
+							readOnly={isEditBtnVisible}
 							type='text'
 							placeholder='Name'
 							data-testId='user-name'
-							value={props.userName}
+							value={userName}
 							onChange={props.handleUserName}
 							required
 						/>
-						{valid.userValid && (
+						{!userValidClass && (
 							<Form.Control.Feedback
 								className='d-block'
 								type='invalid'
@@ -155,17 +151,15 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					</Form.Label>
 					<Col sm={8}>
 						<Form.Control
-							className={
-								valid.notEditable + ' ' + valid.emailValid
-							}
-							readOnly={valid.readOnly}
-							type='email'
-							data-testId='email'
+							className={emailValidClass}
+							readOnly={props.isEditBtnVisible}
+							type='userEmail'
+							data-testId='userEmail'
 							placeholder='Email'
-							value={props.email}
+							value={userEmail}
 							onChange={props.handleEmailChange}
 						/>
-						{valid.emailValid && (
+						{!emailValidClass && (
 							<Form.Control.Feedback
 								className='d-block'
 								type='invalid'
@@ -182,17 +176,15 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					</Form.Label>
 					<Col sm={8}>
 						<Form.Control
-							className={
-								valid.notEditable + ' ' + valid.roleValid
-							}
-							readOnly={valid.readOnly}
+							className={roleValidClass}
+							readOnly={isEditBtnVisible}
 							type='text'
 							placeholder='Role'
-							data-testId='role'
-							value={props.role}
+							data-testId='userRole'
+							value={userRole}
 							onChange={props.handleRoleChange}
 						/>
-						{valid.roleValid && (
+						{!roleValidClass && (
 							<Form.Control.Feedback
 								className='d-block'
 								type='invalid'
@@ -209,17 +201,15 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					</Form.Label>
 					<Col sm={8}>
 						<Form.Control
-							className={
-								valid.notEditable + ' ' + valid.mobileValid
-							}
-							readOnly={valid.readOnly}
+							className={mobileValidClass}
+							readOnly={isEditBtnVisible}
 							type='text'
-							data-testId='mobile'
+							data-testId='userMobile'
 							placeholder='Mobile'
-							value={props.mobile}
+							value={userMobile}
 							onChange={props.handleMobileChange}
 						/>
-						{valid.mobileValid && (
+						{!mobileValidClass && (
 							<Form.Control.Feedback
 								className='d-block'
 								type='invalid'
@@ -235,12 +225,12 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 						Country
 					</Form.Label>
 					<Col sm={8}>
-						{!props.editBtnVisible ? (
+						{!props.isEditBtnVisible ? (
 							<Form.Control
 								as='select'
 								className={valid.notEditable}
 								id='inlineFormCustomSelect'
-								data-testId='country'
+								data-testId='userCountry'
 								onChange={props.handleCountryChange}
 							>
 								{countryData.map((item) => {
@@ -256,11 +246,11 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 							</Form.Control>
 						) : (
 							<Form.Control
-								className={valid.notEditable}
-								readOnly={valid.readOnly}
+								className={fieldClass}
+								readOnly={isEditBtnVisible}
 								type='text'
 								placeholder='Name'
-								value={props.country}
+								value={userCountry}
 							/>
 						)}
 					</Col>

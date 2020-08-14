@@ -21,11 +21,11 @@ describe('<UserDetail />', () => {
                         handleMobileChange={() => {}}
                         handleRoleChange={() => {}}
                         userName='TestUser'
-                        email='testEmail'
-                        role='testRole'
-                        mobile='12345'
-                        country='Singapore'
-                        editBtnVisible={false}
+                        userEmail='testEmail'
+                        userRole='testRole'
+                        userMobile='12345'
+                        userCountry='Singapore'
+                        isEditBtnVisible={false}
                         formValid={true}
                     />
                 </Provider>
@@ -45,11 +45,11 @@ describe('<UserDetail />', () => {
                         handleMobileChange={() => {}}
                         handleRoleChange={() => {}}
                         userName='!!'
-                        email=''
-                        role='!!'
-                        mobile=''
-                        country=''
-                        editBtnVisible={true}
+                        userEmail=''
+                        userRole='!!'
+                        userMobile=''
+                        userCountry=''
+                        isEditBtnVisible={true}
                         formValid={true}
                     />
                 </Provider>

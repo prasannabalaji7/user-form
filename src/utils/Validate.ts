@@ -11,8 +11,13 @@ export const validatePlainText = (matchText: string): boolean =>
 export const validateEmail = (matchText: string): boolean =>
 	emailExp.test(matchText);
 
-export const validateMobile = (matchText: string, country: string): boolean => {
-	const mobilecode = countryData.filter((item) => item.name === country)[0];
+export const validateMobile = (
+	matchText: string,
+	userCountry: string
+): boolean => {
+	const mobilecode = countryData.filter(
+		(item) => item.name === userCountry
+	)[0];
 	return (
 		mobileExp.test(matchText) &&
 		matchText.startsWith('+' + mobilecode['value'])

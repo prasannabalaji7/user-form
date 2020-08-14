@@ -11,7 +11,7 @@ describe('<ProfileCard />', () => {
                 userProfileName='Test123'
                 userProfileRole='TestRole'
                 userProfileCountry='Singapore'
-                editBtnVisible={false}
+                isEditBtnVisible={false}
             />
         );
         expect(getByText('Test123')).toBeInTheDocument();
@@ -25,7 +25,7 @@ describe('<ProfileCard />', () => {
                     userProfileName='Test123'
                     userProfileRole='TestRole'
                     userProfileCountry='Singapore'
-                    editBtnVisible={false}
+                    isEditBtnVisible={false}
                 />
             )
             .toJSON();

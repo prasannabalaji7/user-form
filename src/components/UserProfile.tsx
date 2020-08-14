@@ -37,31 +37,31 @@ export const UserProfile = () => {
   const handleSubmit = (e: MouseEvent<HTMLInputElement>) => {
     rootDispatcher.onSubmit(
       formData.userFormData.userName,
-      formData.userFormData.email,
-      formData.userFormData.role,
-      formData.userFormData.mobile,
-      formData.userFormData.country,
-      formData.editBtnVisible
+      formData.userFormData.userEmail,
+      formData.userFormData.userRole,
+      formData.userFormData.userMobile,
+      formData.userFormData.userCountry,
+      formData.isEditBtnVisible
     );
   };
 
   const handleEdit = (e: MouseEvent<HTMLInputElement>) => {
-    rootDispatcher.onEdit(formData.editBtnVisible);
+    rootDispatcher.onEdit(formData.isEditBtnVisible);
   };
   const handleCancel = () => {
-    if (!formData.editBtnVisible) {
+    if (!formData.isEditBtnVisible) {
       rootDispatcher.onCancel();
     }
   };
 
-  const valid = !formData.editBtnVisible && formData.formValid;
-  const { editBtnVisible, formValid } = formData;
+  const valid = !formData.isEditBtnVisible && formData.formValid;
+  const { isEditBtnVisible, formValid } = formData;
 
   return (
     <div className='usercontainer'>
       <div className='flexParent'>
         <ProfileCard
-          editBtnVisible={editBtnVisible}
+          isEditBtnVisible={isEditBtnVisible}
           {...formData.profileData}
         />
 
@@ -71,18 +71,18 @@ export const UserProfile = () => {
           handleUserName={handleUserName}
           handleMobileChange={handleMobileChange}
           handleRoleChange={handleRoleChange}
-          editBtnVisible={editBtnVisible}
+          isEditBtnVisible={isEditBtnVisible}
           formValid={formValid}
           {...formData.userFormData}
         />
       </div>
       <div className='toolBar'>
-        {formData.editBtnVisible ? (
+        {formData.isEditBtnVisible ? (
           <Button
             type='submit'
             data-testId='submit'
             className='customSpacing'
-            disabled={formData.editBtnVisible ? false : !valid}
+            disabled={formData.isEditBtnVisible ? false : !valid}
             onClick={handleEdit}
           >
             Edit
@@ -92,7 +92,7 @@ export const UserProfile = () => {
             type='submit'
             data-testId='submit'
             className='customSpacing'
-            disabled={formData.editBtnVisible ? false : !valid}
+            disabled={formData.isEditBtnVisible ? false : !valid}
             onClick={handleSubmit}
           >
             Submit
@@ -104,7 +104,7 @@ export const UserProfile = () => {
           variant='outline-primary'
           onClick={handleCancel}
         >
-          {formData.editBtnVisible ? 'Home' : 'Cancel'}
+          {formData.isEditBtnVisible ? 'Home' : 'Cancel'}
         </Button>
       </div>
     </div>

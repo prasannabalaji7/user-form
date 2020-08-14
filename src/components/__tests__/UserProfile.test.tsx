@@ -21,7 +21,7 @@ describe('<UserProfile />', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
-  test('Handle Change events - User Name', async () => {
+  test('when we enter data in user name - User Name', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
@@ -33,53 +33,61 @@ describe('<UserProfile />', () => {
     });
     expect((store.getState() as any).userFormData.userName).toBe('User Name');
   });
-  test('Handle Change events - email', async () => {
+  test('whe we enter data in email - userEmail', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
         <UserProfile />
       </Provider>
     );
-    fireEvent.change(getByTestId('email'), { target: { value: 1 } });
-    expect((store.getState() as any).userFormData.email).toBe(
-      'email@domain.com'
+    fireEvent.change(getByTestId('userEmail'), { target: { value: 1 } });
+    expect((store.getState() as any).userFormData.userEmail).toBe(
+      'userEmail@domain.com'
     );
   });
-  test('Handle Change events - role', async () => {
+  test('when we enter data in role - userRole', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
         <UserProfile />
       </Provider>
     );
-    fireEvent.change(getByTestId('role'), { target: { value: 'User Role' } });
-    expect((store.getState() as any).userFormData.role).toBe('User Role');
+    fireEvent.change(getByTestId('userRole'), {
+      target: { value: 'User Role' },
+    });
+    expect((store.getState() as any).userFormData.userRole).toBe('User Role');
   });
-  test('Handle Change events - mobile', async () => {
+  test('when we enter mobile number - userMobile', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
         <UserProfile />
       </Provider>
     );
-    fireEvent.change(getByTestId('mobile'), {
+    fireEvent.change(getByTestId('userMobile'), {
       target: { value: '+9311111111' },
     });
-    expect((store.getState() as any).userFormData.mobile).toBe('+9311111111');
+    expect((store.getState() as any).userFormData.userMobile).toBe(
+      '+9311111111'
+    );
   });
-  test('Handle Change events - country', async () => {
+  test('when we change the country code we validate mobile code- userCountry', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
         <UserProfile />
       </Provider>
     );
-    fireEvent.change(getByTestId('country'), {
+    fireEvent.change(getByTestId('userCountry'), {
       target: { value: 'Afghanistan' },
     });
-    expect((store.getState() as any).userFormData.country).toBe('Afghanistan');
+    expect((store.getState() as any).userFormData.userCountry).toBe(
+      'Afghanistan'
+    );
+
+    expect((store.getState() as any).userFormData.userMobile).toContain('+93');
   });
-  test('Handle Change events - submit', async () => {
+  test('when we click submit in the form we display details it in profile - submit', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
@@ -88,7 +96,7 @@ describe('<UserProfile />', () => {
     );
     fireEvent.click(getByTestId('submit'), { target: { value: 1 } });
   });
-  test('Handle Change events - cancel', async () => {
+  test('when is click cancel in the form reset to inital state- cancel', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
@@ -96,5 +104,27 @@ describe('<UserProfile />', () => {
       </Provider>
     );
     fireEvent.click(getByTestId('cancel'), { target: { value: 1 } });
+  });
+
+  test('when we give wrong value in form it becomes in valid', async () => {
+    const store = mockStore(initialState);
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <UserProfile />
+      </Provider>
+    );
+
+    fireEvent.change(getByTestId('userRole'), {
+      target: { value: 'User Role2' },
+    });
+
+    expect((store.getState() as any).userFormData.userRole).toBe('User Role');
+    expect((store.getState() as any).formValid).toBe(false);
+
+    fireEvent.change(getByTestId('userEmail'), { target: { value: '' } });
+    expect((store.getState() as any).formValid).toBe(false);
+
+    fireEvent.change(getByTestId('userMobile'), { target: { value: '0000' } });
+    expect((store.getState() as any).formValid).toBe(false);
   });
 });

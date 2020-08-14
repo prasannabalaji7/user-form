@@ -20,7 +20,7 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
         className="col-sm-8"
       >
         <input
-          className="plainView is-invalid form-control"
+          className="plainView form-control"
           data-testId="user-name"
           onChange={[Function]}
           placeholder="Name"
@@ -29,11 +29,6 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
           type="text"
           value="!!"
         />
-        <div
-          className="d-block invalid-feedback"
-        >
-          please enter only alphabets
-        </div>
       </div>
     </div>
     <div
@@ -49,19 +44,14 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
         className="col-sm-8"
       >
         <input
-          className="plainView is-invalid form-control"
-          data-testId="email"
+          className="plainView form-control"
+          data-testId="userEmail"
           onChange={[Function]}
           placeholder="Email"
           readOnly={true}
-          type="email"
+          type="userEmail"
           value=""
         />
-        <div
-          className="d-block invalid-feedback"
-        >
-          please enter email in email@domain.com format
-        </div>
       </div>
     </div>
     <div
@@ -77,19 +67,14 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
         className="col-sm-8"
       >
         <input
-          className="plainView is-invalid form-control"
-          data-testId="role"
+          className="plainView form-control"
+          data-testId="userRole"
           onChange={[Function]}
           placeholder="Role"
           readOnly={true}
           type="text"
           value="!!"
         />
-        <div
-          className="d-block invalid-feedback"
-        >
-          please enter only alphabets
-        </div>
       </div>
     </div>
     <div
@@ -104,19 +89,14 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
         className="col-sm-8"
       >
         <input
-          className="plainView is-invalid form-control"
-          data-testId="mobile"
+          className="plainView form-control"
+          data-testId="userMobile"
           onChange={[Function]}
           placeholder="Mobile"
           readOnly={true}
           type="text"
           value=""
         />
-        <div
-          className="d-block invalid-feedback"
-        >
-          please apply correct country code and number 
-        </div>
       </div>
     </div>
     <div
@@ -164,7 +144,7 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
         className="col-sm-8"
       >
         <input
-          className="  form-control"
+          className="in-valid form-control"
           data-testId="user-name"
           onChange={[Function]}
           placeholder="Name"
@@ -173,7 +153,6 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
           type="text"
           value="TestUser"
         />
-        
       </div>
     </div>
     <div
@@ -189,15 +168,14 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
         className="col-sm-8"
       >
         <input
-          className="  form-control"
-          data-testId="email"
+          className="in-valid form-control"
+          data-testId="userEmail"
           onChange={[Function]}
           placeholder="Email"
           readOnly={false}
-          type="email"
+          type="userEmail"
           value="testEmail"
         />
-        
       </div>
     </div>
     <div
@@ -213,15 +191,14 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
         className="col-sm-8"
       >
         <input
-          className="  form-control"
-          data-testId="role"
+          className="in-valid form-control"
+          data-testId="userRole"
           onChange={[Function]}
           placeholder="Role"
           readOnly={false}
           type="text"
           value="testRole"
         />
-        
       </div>
     </div>
     <div
@@ -236,15 +213,14 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
         className="col-sm-8"
       >
         <input
-          className="  form-control"
-          data-testId="mobile"
+          className="in-valid form-control"
+          data-testId="userMobile"
           onChange={[Function]}
           placeholder="Mobile"
           readOnly={false}
           type="text"
           value="12345"
         />
-        
       </div>
     </div>
     <div
@@ -261,7 +237,7 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
       >
         <select
           className="form-control"
-          data-testId="country"
+          data-testId="userCountry"
           id="inlineFormCustomSelect"
           onChange={[Function]}
         >

@@ -9,31 +9,31 @@ describe('Root Dispatcher', () => {
             type: 'nameChange',
         });
     });
-    test('Dispatch Role Change', () => {
+    test('when user name is changed', () => {
         const dispatch = jest.fn();
         new RootDispatcher(dispatch).roleChange('User Role');
         expect(dispatch).toBeCalledWith({
-            payload: { role: 'User Role' },
+            payload: { userRole: 'User Role' },
             type: 'roleChange',
         });
     });
-    test('Dispatch Number Change', () => {
+    test('when use mobile is change', () => {
         const dispatch = jest.fn();
         new RootDispatcher(dispatch).numberChange('100');
         expect(dispatch).toBeCalledWith({
-            payload: { mobile: '100' },
+            payload: { userMobile: '100' },
             type: 'numberChange',
         });
     });
-    test('Dispatch onEidt', () => {
+    test('when use edit button is clicked', () => {
         const dispatch = jest.fn();
         new RootDispatcher(dispatch).onEdit(true);
         expect(dispatch).toBeCalledWith({
-            payload: { editBtnVisible: true },
+            payload: { isEditBtnVisible: true },
             type: 'onEdit',
         });
     });
-    test('Dispatch Validate Submir', () => {
+    test('when submit button is clicked', () => {
         const dispatch = jest.fn();
         new RootDispatcher(dispatch).validateSubmit(true);
         expect(dispatch).toBeCalledWith({

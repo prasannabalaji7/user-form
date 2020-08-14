@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import classNames from 'classnames';
 import { Card, Image, ListGroupItem, ListGroup } from 'react-bootstrap';
 import Popup from './Popup';
 import { popupMessage, imgUrl } from '../constants/Constants';
@@ -7,20 +8,14 @@ export interface ProfileProps {
 	userProfileName: string;
 	userProfileRole: string;
 	userProfileCountry: string;
-	editBtnVisible: boolean;
+	isEditBtnVisible: boolean;
 }
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
 	const [popup, setPopup] = useState(popupMessage);
-	const [editableClass, setEditableClass] = useState('childContainer');
-
-	useEffect(() => {
-		if (props.editBtnVisible) {
-			setEditableClass(() => 'childContainer profileReadOnly');
-		} else {
-			setEditableClass(() => 'childContainer');
-		}
-	}, [props.editBtnVisible]);
+	const editableClass = classNames('childContainer', {
+		profileReadOnly: props.isEditBtnVisible,
+	});
 
 	return (
 		<div className={editableClass}>

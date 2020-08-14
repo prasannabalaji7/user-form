@@ -11,10 +11,10 @@ export const ErrorMessage = {
 };
 
 export const popupMessage = {
-    modalShow: false,
-    title: '',
-    message: '',
-  }
+  modalShow: false,
+  title: '',
+  message: '',
+};
 
 export const imgUrl = 'https://i.stack.imgur.com/YQu5k.png';
 

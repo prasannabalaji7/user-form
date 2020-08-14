@@ -8,26 +8,26 @@ export interface ProfileData {
 
 export interface UserFormData {
     userName: string;
-    email: string;
-    role: string;
-    mobile: string;
-    country: string;
+    userEmail: string;
+    userRole: string;
+    userMobile: string;
+    userCountry: string;
 }
 
 export interface InitialStateInterface {
     profileData: ProfileData;
     userFormData: UserFormData;
     formValid: boolean;
-    editBtnVisible: boolean;
+    isEditBtnVisible: boolean;
 }
 
 export const initialState: InitialStateInterface = {
     userFormData: {
         userName: 'User Name',
-        email: 'email@domain.com',
-        role: 'User Role',
-        mobile: '+9311111111',
-        country: 'Afghanistan',
+        userEmail: 'userEmail@domain.com',
+        userRole: 'User Role',
+        userMobile: '+9311111111',
+        userCountry: 'Afghanistan',
     },
     profileData: {
         userProfileName: 'User Name',
@@ -35,7 +35,7 @@ export const initialState: InitialStateInterface = {
         userProfileCountry: 'Afghanistan',
     },
     formValid: false,
-    editBtnVisible: false,
+    isEditBtnVisible: false,
 };
 
 export interface DispatchAction extends Action {
@@ -60,7 +60,7 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
                 ...state,
                 userFormData: {
                     ...state.userFormData,
-                    email: action.payload.email,
+                    userEmail: action.payload.userEmail,
                 },
             };
         case 'roleChange':
@@ -68,7 +68,7 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
                 ...state,
                 userFormData: {
                     ...state.userFormData,
-                    role: action.payload.role,
+                    userRole: action.payload.userRole,
                 },
             };
         case 'numberChange':
@@ -76,7 +76,7 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
                 ...state,
                 userFormData: {
                     ...state.userFormData,
-                    mobile: action.payload.mobile,
+                    userMobile: action.payload.userMobile,
                 },
             };
         case 'countryChange':
@@ -84,22 +84,25 @@ export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
                 ...state,
                 userFormData: {
                     ...state.userFormData,
-                    country: action.payload.country,
+                    userCountry: action.payload.userCountry,
                 },
             };
         case 'validateSubmit':
             return { ...state, formValid: !action.payload.formValid };
         case 'onEdit':
-            return { ...state, editBtnVisible: !action.payload.editBtnVisible };
+            return {
+                ...state,
+                isEditBtnVisible: !action.payload.isEditBtnVisible,
+            };
         case 'onSubmit':
             return {
                 ...state,
                 profileData: {
                     userProfileName: action.payload.userName,
-                    userProfileRole: action.payload.role,
-                    userProfileCountry: action.payload.country,
+                    userProfileRole: action.payload.userRole,
+                    userProfileCountry: action.payload.userCountry,
                 },
-                editBtnVisible: !action.payload.editBtnVisible,
+                isEditBtnVisible: !action.payload.isEditBtnVisible,
             };
         case 'onCancel':
             return { ...initialState };

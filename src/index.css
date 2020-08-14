@@ -23,7 +23,7 @@ body {
   border: 0.2rem solid #ececec;
 }
 
-.childContainer > .card{
+.childContainer > .card {
   min-width: 12em;
   border: transparent;
 }
@@ -116,11 +116,18 @@ input[readonly].plainView {
   .flexParent {
     flex-wrap: wrap;
   }
+  .button {
+    display: block;
+    width: 100%;
+  }
   .toolBar {
     display: flex;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: space-evenly;    
   }
+  .toolBar .button {
+    width:100%;
+  } 
 }
 
 .profileReadOnly {
