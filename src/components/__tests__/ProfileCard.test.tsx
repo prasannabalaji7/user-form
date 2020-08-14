@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 import renderer from 'react-test-renderer';
 
 describe('<ProfileCard />', () => {
-    test('should display the values', async () => {
+    test('defaut value in the profile page', async () => {
         const { getByText } = render(
             <ProfileCard
                 userProfileName='Test123'

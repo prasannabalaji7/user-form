@@ -15,11 +15,14 @@ export const validateMobile = (
 	matchText: string,
 	userCountry: string
 ): boolean => {
-	const mobilecode = countryData.filter(
-		(item) => item.name === userCountry
-	)[0];
-	return (
-		mobileExp.test(matchText) &&
-		matchText.startsWith('+' + mobilecode['value'])
-	);
+	if (matchText || userCountry) {
+		const mobilecode = countryData.filter(
+			(item) => item.name === userCountry
+		)[0];
+		return (
+			mobileExp.test(matchText) &&
+			matchText.startsWith('+' + mobilecode['value'])
+		);
+	}
+	return false;
 };

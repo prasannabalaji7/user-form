@@ -21,7 +21,7 @@ describe('<UserProfile />', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
-  test('when we enter data in user name - User Name', async () => {
+  test('when we enter data in user name it updates in form- User Name', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
@@ -33,7 +33,7 @@ describe('<UserProfile />', () => {
     });
     expect((store.getState() as any).userFormData.userName).toBe('User Name');
   });
-  test('whe we enter data in email - userEmail', async () => {
+  test('whe we enter data in email it updates in form- userEmail', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
@@ -45,7 +45,7 @@ describe('<UserProfile />', () => {
       'userEmail@domain.com'
     );
   });
-  test('when we enter data in role - userRole', async () => {
+  test('when we enter data in role it updates in form - userRole', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
@@ -57,7 +57,7 @@ describe('<UserProfile />', () => {
     });
     expect((store.getState() as any).userFormData.userRole).toBe('User Role');
   });
-  test('when we enter mobile number - userMobile', async () => {
+  test('when we enter mobile number it updates in form- userMobile', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
@@ -71,7 +71,7 @@ describe('<UserProfile />', () => {
       '+9311111111'
     );
   });
-  test('when we change the country code we validate mobile code- userCountry', async () => {
+  test('when we change the country code mobile number prefix updates in form- userCountry', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
@@ -96,7 +96,7 @@ describe('<UserProfile />', () => {
     );
     fireEvent.click(getByTestId('submit'), { target: { value: 1 } });
   });
-  test('when is click cancel in the form reset to inital state- cancel', async () => {
+  test('when we click cancel in the form reset to inital state- cancel', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
@@ -105,8 +105,7 @@ describe('<UserProfile />', () => {
     );
     fireEvent.click(getByTestId('cancel'), { target: { value: 1 } });
   });
-
-  test('when we give wrong value in form it becomes in valid', async () => {
+  test('when incorrect value entered in  form it becomes in valid', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
