@@ -3,10 +3,15 @@ import { render, fireEvent, waitForElement } from '@testing-library/react';
 import { UserDetail } from '../UserDetail';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { initialState } from '../../store/root-reducer';
+import { initialState } from '../../store/RootReducer';
 import { screen, waitFor } from '@testing-library/dom';
 import { UserProfile } from '../UserProfile';
 import renderer from 'react-test-renderer';
+
+function isElementInput<T extends HTMLElement>(element: T) {
+    // Validate that element is actually an input
+    return element instanceof HTMLInputElement;
+}
 
 describe('<UserProfile />', () => {
   const mockStore = configureStore();
@@ -42,7 +47,7 @@ describe('<UserProfile />', () => {
     );
     fireEvent.change(getByTestId('userEmail'), { target: { value: 1 } });
     expect((store.getState() as any).userFormData.userEmail).toBe(
-      'userEmail@domain.com'
+      'email@domain.com'
     );
   });
   test('when we enter data in role it updates in form - userRole', async () => {
@@ -95,6 +100,8 @@ describe('<UserProfile />', () => {
       </Provider>
     );
     fireEvent.click(getByTestId('submit'), { target: { value: 1 } });
+    expect((store.getState() as any).isEditBtnVisible).toBe(false);
+
   });
   test('when we click cancel in the form reset to inital state- cancel', async () => {
     const store = mockStore(initialState);
@@ -104,26 +111,7 @@ describe('<UserProfile />', () => {
       </Provider>
     );
     fireEvent.click(getByTestId('cancel'), { target: { value: 1 } });
-  });
-  test('when incorrect value entered in  form it becomes in valid', async () => {
-    const store = mockStore(initialState);
-    const { getByTestId } = render(
-      <Provider store={store}>
-        <UserProfile />
-      </Provider>
-    );
+    expect((store.getState() as any).isEditBtnVisible).toBe(false);
 
-    fireEvent.change(getByTestId('userRole'), {
-      target: { value: 'User Role2' },
-    });
-
-    expect((store.getState() as any).userFormData.userRole).toBe('User Role');
-    expect((store.getState() as any).formValid).toBe(false);
-
-    fireEvent.change(getByTestId('userEmail'), { target: { value: '' } });
-    expect((store.getState() as any).formValid).toBe(false);
-
-    fireEvent.change(getByTestId('userMobile'), { target: { value: '0000' } });
-    expect((store.getState() as any).formValid).toBe(false);
   });
 });

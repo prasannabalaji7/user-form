@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`what dom renderer is inital load will remain after theere is change in state 1`] = `
+<div
+  className="form-group row"
+  id="anyId"
+>
+  <label
+    className="form-label col-form-label col-sm-4"
+  >
+    Role
+  </label>
+  <div
+    className="col-sm-8"
+  >
+    <input
+      className="form-control"
+      data-testId="anyField"
+      onChange={[Function]}
+      placeholder="Name"
+      readOnly={false}
+      required={true}
+      type="text"
+      value="Test 2"
+    />
+  </div>
+</div>
+`;

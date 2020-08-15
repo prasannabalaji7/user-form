@@ -3,7 +3,7 @@ import { render, fireEvent, waitForElement } from '@testing-library/react';
 import { UserDetail } from '../UserDetail';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { initialState } from '../../store/root-reducer';
+import { initialState } from '../../store/RootReducer';
 import { screen } from '@testing-library/dom';
 import renderer from 'react-test-renderer';
 

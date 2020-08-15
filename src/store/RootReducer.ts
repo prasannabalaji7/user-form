@@ -24,7 +24,7 @@ export interface InitialStateInterface {
 export const initialState: InitialStateInterface = {
     userFormData: {
         userName: 'User Name',
-        userEmail: 'userEmail@domain.com',
+        userEmail: 'email@domain.com',
         userRole: 'User Role',
         userMobile: '+9311111111',
         userCountry: 'Afghanistan',
@@ -42,7 +42,7 @@ export interface DispatchAction extends Action {
     payload: any;
 }
 
-export const rootReducer: Reducer<InitialStateInterface, DispatchAction> = (
+export const RootReducer: Reducer<InitialStateInterface, DispatchAction> = (
     state = initialState,
     action
 ) => {

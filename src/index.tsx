@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 import './index.css';
 import {
 	DispatchAction,
-	rootReducer,
+	RootReducer,
 	InitialStateInterface,
-} from './store/root-reducer';
+} from './store/RootReducer';
 import App from './App';
 
 const store = createStore<
@@ -15,7 +15,7 @@ const store = createStore<
 	DispatchAction,
 	unknown,
 	unknown
->(rootReducer);
+>(RootReducer);
 
 ReactDOM.render(
 	<Provider store={store}>

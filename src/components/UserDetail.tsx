@@ -1,14 +1,15 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import classNames from 'classnames';
-import { useDispatch } from 'react-redux';
-import { RootDispatcher } from '../store/root-dispatcher';
-import { Form, Row, Col } from 'react-bootstrap';
-import { countryData, ErrorMessage } from '../constants/Constants';
+import React, { ChangeEvent, useEffect, useState } from "react";
+import classNames from "classnames";
+import { Form, Row, Col } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../store/RootDispatcher";
+import { FormField } from "./FormFields";
+import { countryData, ErrorMessage } from "../constants/Constants";
 import {
 	validatePlainText,
 	validateEmail,
 	validateMobile,
-} from '../utils/Validate';
+} from "../utils/Validate";
 
 export interface UserDetailProps {
 	userName: string;
@@ -39,7 +40,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 	const dispatch = useDispatch();
 	const rootDispatcher = new RootDispatcher(dispatch);
 	const [valid, setValid] = useState({
-		notEditable: '',
+		notEditable: "",
 		readOnly: false,
 		isValidEmail: true,
 		isValidUser: true,
@@ -47,28 +48,15 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 		isValidMobile: true,
 	});
 
-	const editableClass = classNames('childContainer', {
-		readOnlyMode: isEditBtnVisible,
-	});
-	const fieldClass = classNames('', {
-		plainView: isEditBtnVisible,
-	});
+	const appendClass = (
+		container: string,
+		key: string,
+		condition: boolean
+	) => {
+		return classNames(container, { [key]: condition });
+	};
 
-	const userValidClass = classNames(fieldClass, {
-		'in-valid': valid.isValidUser,
-	});
-
-	const emailValidClass = classNames(fieldClass, {
-		'in-valid': valid.isValidEmail,
-	});
-
-	const roleValidClass = classNames(fieldClass, {
-		'in-valid': valid.isValidRole,
-	});
-
-	const mobileValidClass = classNames(fieldClass, {
-		'in-valid': valid.isValidMobile,
-	});
+	const fieldClass = appendClass("", "plainView", isEditBtnVisible);
 
 	useEffect(() => {
 		setValid((state) => ({
@@ -117,120 +105,86 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 	]);
 
 	return (
-		<div className={editableClass}>
+		<div
+			className={appendClass(
+				"childContainer",
+				"readOnlyMode",
+				isEditBtnVisible
+			)}
+		>
 			<Form>
-				<Form.Group as={Row} id='formHorizontalName'>
-					<Form.Label column sm={4}>
-						Full Name
-					</Form.Label>
-					<Col sm={8}>
-						<Form.Control
-							className={userValidClass}
-							readOnly={isEditBtnVisible}
-							type='text'
-							placeholder='Name'
-							data-testId='user-name'
-							value={userName}
-							onChange={props.handleUserName}
-							required
-						/>
-						{!userValidClass && (
-							<Form.Control.Feedback
-								className='d-block'
-								type='invalid'
-							>
-								{ErrorMessage.nameError}
-							</Form.Control.Feedback>
-						)}
-					</Col>
-				</Form.Group>
+				<FormField
+					fieldId="formHorizontalName"
+					testId="user-name"
+					label="Full Name"
+					fieldValid={valid.isValidUser}
+					isValidClass={appendClass(
+						fieldClass,
+						"plainView",
+						valid.isValidUser
+					)}
+					isReadOnly={isEditBtnVisible}
+					fieldValue={userName}
+					userAction={props.handleUserName}
+					errorMsg={ErrorMessage.nameError}
+				/>
+				<FormField
+					fieldId="formHorizontalEmail"
+					testId="userEmail"
+					label="Email"
+					fieldValid={valid.isValidEmail}
+					isValidClass={appendClass(
+						fieldClass,
+						"in-valid",
+						valid.isValidEmail
+					)}
+					isReadOnly={isEditBtnVisible}
+					fieldValue={userEmail}
+					userAction={props.handleEmailChange}
+					errorMsg={ErrorMessage.mailError}
+				/>
+				<FormField
+					fieldId="formHorizontalRole"
+					testId="userRole"
+					label="Role"
+					fieldValid={valid.isValidRole}
+					isValidClass={appendClass(
+						fieldClass,
+						"in-valid",
+						valid.isValidRole
+					)}
+					isReadOnly={isEditBtnVisible}
+					fieldValue={userRole}
+					userAction={props.handleRoleChange}
+					errorMsg={ErrorMessage.nameError}
+				/>
+				<FormField
+					fieldId="formHorizontalMobile"
+					testId="userMobile"
+					label="Mobile"
+					fieldValid={valid.isValidMobile}
+					isValidClass={appendClass(
+						fieldClass,
+						"in-valid",
+						valid.isValidMobile
+					)}
+					isReadOnly={isEditBtnVisible}
+					fieldValue={userMobile}
+					userAction={props.handleMobileChange}
+					errorMsg={ErrorMessage.mobileError}
+				/>
 
-				<Form.Group as={Row} id='formHorizontalEmail'>
-					<Form.Label column sm={4}>
-						Email
-					</Form.Label>
-					<Col sm={8}>
-						<Form.Control
-							className={emailValidClass}
-							readOnly={props.isEditBtnVisible}
-							type='userEmail'
-							data-testId='userEmail'
-							placeholder='Email'
-							value={userEmail}
-							onChange={props.handleEmailChange}
-						/>
-						{!emailValidClass && (
-							<Form.Control.Feedback
-								className='d-block'
-								type='invalid'
-							>
-								{ErrorMessage.mailError}
-							</Form.Control.Feedback>
-						)}
-					</Col>
-				</Form.Group>
-
-				<Form.Group as={Row} id='formHorizontalRole'>
-					<Form.Label column sm={4}>
-						Role
-					</Form.Label>
-					<Col sm={8}>
-						<Form.Control
-							className={roleValidClass}
-							readOnly={isEditBtnVisible}
-							type='text'
-							placeholder='Role'
-							data-testId='userRole'
-							value={userRole}
-							onChange={props.handleRoleChange}
-						/>
-						{!roleValidClass && (
-							<Form.Control.Feedback
-								className='d-block'
-								type='invalid'
-							>
-								{ErrorMessage.nameError}
-							</Form.Control.Feedback>
-						)}
-					</Col>
-				</Form.Group>
-
-				<Form.Group as={Row}>
-					<Form.Label column sm={4}>
-						Mobile
-					</Form.Label>
-					<Col sm={8}>
-						<Form.Control
-							className={mobileValidClass}
-							readOnly={isEditBtnVisible}
-							type='text'
-							data-testId='userMobile'
-							placeholder='Mobile'
-							value={userMobile}
-							onChange={props.handleMobileChange}
-						/>
-						{!mobileValidClass && (
-							<Form.Control.Feedback
-								className='d-block'
-								type='invalid'
-							>
-								{ErrorMessage.mobileError}
-							</Form.Control.Feedback>
-						)}
-					</Col>
-				</Form.Group>
-
-				<Form.Group as={Row} id='formHorizontalCountry'>
+				<Form.Group as={Row} id="formHorizontalCountry">
 					<Form.Label column sm={4}>
 						Country
 					</Form.Label>
 					<Col sm={8}>
-						{!props.isEditBtnVisible ? (
+						{!isEditBtnVisible ? (
 							<Form.Control
-								as='select'
+								as="select"
 								className={valid.notEditable}
-								id='inlineFormCustomSelect'
-								data-testId='userCountry'
+								id="inlineFormCustomSelect"
+								data-testId="userCountry"
 								onChange={props.handleCountryChange}
 							>
 								{countryData.map((item) => {
@@ -248,8 +202,8 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 							<Form.Control
 								className={fieldClass}
 								readOnly={isEditBtnVisible}
-								type='text'
-								placeholder='Name'
+								type="text"
+								placeholder="Name"
 								value={userCountry}
 							/>
 						)}

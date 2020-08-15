@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { DispatchAction } from './root-reducer';
+import { DispatchAction } from './RootReducer';
 
 export class RootDispatcher {
     private readonly dispatch: Dispatch<DispatchAction>;

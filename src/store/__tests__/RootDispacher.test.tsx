@@ -1,4 +1,4 @@
-import RootDispatcher from '../root-dispatcher';
+import RootDispatcher from '../RootDispatcher';
 
 describe('Root Dispatcher', () => {
     test('Dispatch Name Change', () => {

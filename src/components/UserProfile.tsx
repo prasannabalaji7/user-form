@@ -1,9 +1,9 @@
 import React, { ChangeEvent, MouseEvent } from 'react';
 import ProfileCard from './ProfileCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { InitialStateInterface } from '../store/root-reducer';
+import { InitialStateInterface } from '../store/RootReducer';
 import { UserDetail } from './UserDetail';
-import RootDispatcher from '../store/root-dispatcher';
+import RootDispatcher from '../store/RootDispatcher';
 import { Button } from 'react-bootstrap';
 
 export const UserProfile = () => {

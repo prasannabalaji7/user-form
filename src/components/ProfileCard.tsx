@@ -13,8 +13,9 @@ export interface ProfileProps {
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
 	const [popup, setPopup] = useState(popupMessage);
+	const {isEditBtnVisible,userProfileName,userProfileCountry,userProfileRole} = props;
 	const editableClass = classNames('childContainer', {
-		profileReadOnly: props.isEditBtnVisible,
+		profileReadOnly: isEditBtnVisible,
 	});
 
 	return (
@@ -29,13 +30,13 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
 					/>
 					<ListGroup className='list-group-flush borderless'>
 						<ListGroupItem className='borderless h5'>
-							{props.userProfileName}
+							{userProfileName}
 						</ListGroupItem>
 						<ListGroupItem className='borderless'>
-							{props.userProfileRole}
+							{userProfileRole}
 						</ListGroupItem>
 						<ListGroupItem className='borderless'>
-							{props.userProfileCountry}
+							{userProfileCountry}
 						</ListGroupItem>
 					</ListGroup>
 				</Card.Body>

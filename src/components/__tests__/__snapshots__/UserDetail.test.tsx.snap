@@ -29,6 +29,11 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
           type="text"
           value="!!"
         />
+        <div
+          className="d-block invalid-feedback"
+        >
+          please enter only alphabets
+        </div>
       </div>
     </div>
     <div
@@ -47,11 +52,17 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
           className="plainView form-control"
           data-testId="userEmail"
           onChange={[Function]}
-          placeholder="Email"
+          placeholder="Name"
           readOnly={true}
-          type="userEmail"
+          required={true}
+          type="text"
           value=""
         />
+        <div
+          className="d-block invalid-feedback"
+        >
+          please enter email in email@domain.com format
+        </div>
       </div>
     </div>
     <div
@@ -70,15 +81,22 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
           className="plainView form-control"
           data-testId="userRole"
           onChange={[Function]}
-          placeholder="Role"
+          placeholder="Name"
           readOnly={true}
+          required={true}
           type="text"
           value="!!"
         />
+        <div
+          className="d-block invalid-feedback"
+        >
+          please enter only alphabets
+        </div>
       </div>
     </div>
     <div
       className="form-group row"
+      id="formHorizontalMobile"
     >
       <label
         className="form-label col-form-label col-sm-4"
@@ -92,11 +110,17 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
           className="plainView form-control"
           data-testId="userMobile"
           onChange={[Function]}
-          placeholder="Mobile"
+          placeholder="Name"
           readOnly={true}
+          required={true}
           type="text"
           value=""
         />
+        <div
+          className="d-block invalid-feedback"
+        >
+          please apply correct country code and number 
+        </div>
       </div>
     </div>
     <div
@@ -144,7 +168,7 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
         className="col-sm-8"
       >
         <input
-          className="in-valid form-control"
+          className="plainView form-control"
           data-testId="user-name"
           onChange={[Function]}
           placeholder="Name"
@@ -171,9 +195,10 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
           className="in-valid form-control"
           data-testId="userEmail"
           onChange={[Function]}
-          placeholder="Email"
+          placeholder="Name"
           readOnly={false}
-          type="userEmail"
+          required={true}
+          type="text"
           value="testEmail"
         />
       </div>
@@ -194,8 +219,9 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
           className="in-valid form-control"
           data-testId="userRole"
           onChange={[Function]}
-          placeholder="Role"
+          placeholder="Name"
           readOnly={false}
+          required={true}
           type="text"
           value="testRole"
         />
@@ -203,6 +229,7 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
     </div>
     <div
       className="form-group row"
+      id="formHorizontalMobile"
     >
       <label
         className="form-label col-form-label col-sm-4"
@@ -216,8 +243,9 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
           className="in-valid form-control"
           data-testId="userMobile"
           onChange={[Function]}
-          placeholder="Mobile"
+          placeholder="Name"
           readOnly={false}
+          required={true}
           type="text"
           value="12345"
         />
