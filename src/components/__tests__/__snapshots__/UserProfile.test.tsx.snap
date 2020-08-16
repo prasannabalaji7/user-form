@@ -73,7 +73,7 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
             className="col-sm-8"
           >
             <input
-              className="plainView form-control"
+              className="form-control"
               data-testId="user-name"
               onChange={[Function]}
               placeholder="Name"
@@ -97,13 +97,13 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
             className="col-sm-8"
           >
             <input
-              className="in-valid form-control"
+              className="form-control"
               data-testId="userEmail"
               onChange={[Function]}
               placeholder="Name"
               readOnly={false}
               required={true}
-              type="text"
+              type="email"
               value="email@domain.com"
             />
           </div>
@@ -121,7 +121,7 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
             className="col-sm-8"
           >
             <input
-              className="in-valid form-control"
+              className="form-control"
               data-testId="userRole"
               onChange={[Function]}
               placeholder="Name"
@@ -145,7 +145,7 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
             className="col-sm-8"
           >
             <input
-              className="in-valid form-control"
+              className="form-control"
               data-testId="userMobile"
               onChange={[Function]}
               placeholder="Name"
@@ -1456,7 +1456,7 @@ exports[`<UserProfile /> Snapshot Testing 1`] = `
     <button
       className="customSpacing btn btn-primary"
       data-testId="submit"
-      disabled={true}
+      disabled={false}
       onClick={[Function]}
       type="submit"
     >

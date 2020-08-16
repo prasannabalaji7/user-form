@@ -1,30 +1,65 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
+import classNames from "classnames";
 import { Form, Row, Col } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../store/RootDispatcher";
 
 export interface FormFieldProps {
 	fieldId: string;
 	testId: string;
 	label: string;
-	isValidClass: string;
 	isReadOnly: boolean;
 	fieldValue: string;
 	errorMsg: string;
-	fieldValid: boolean;
+	userCountry?: string;
+	type: string;
+	validate: (matchText: string, userCountry?: string) => boolean;
 	userAction: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const FormField: React.FC<FormFieldProps> = (props) => {
 	const {
 		label,
-		isValidClass,
 		isReadOnly,
 		fieldValue,
 		errorMsg,
 		userAction,
+		userCountry,
+		validate,
 		fieldId,
 		testId,
-		fieldValid,
+		type,
 	} = props;
+	const dispatch = useDispatch();
+	const rootDispatcher = new RootDispatcher(dispatch);
+	const [formValid, setFormValid] = useState(true);
+	useEffect(() => {
+		if (formValid) {
+			rootDispatcher.validateSubmit(true);
+		} else {
+			rootDispatcher.validateSubmit(false);
+		}
+	}, [formValid]);
+
+
+	const appendClass = (
+		container: string,
+		key: string,
+		condition: boolean
+	) => {
+		return classNames(container, { [key]: condition });
+	};
+
+	const fieldClass = appendClass("", "plainView", isReadOnly);
+
+	const validateForm = (e: ChangeEvent<HTMLInputElement>) => {
+		if (validate(e.target.value, userCountry)) {
+			setFormValid(true);
+		} else {
+			setFormValid(false);
+		}
+	};
+
 	return (
 		<Form.Group as={Row} id={fieldId}>
 			<Form.Label column sm={4}>
@@ -32,16 +67,18 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
 			</Form.Label>
 			<Col sm={8}>
 				<Form.Control
-					className={isValidClass}
+					className={fieldClass}
 					readOnly={isReadOnly}
-					type="text"
-					placeholder="Name"
+					type={type}
 					data-testId={testId}
 					value={fieldValue}
-					onChange={userAction}
+					onChange={(e: ChangeEvent<HTMLInputElement>) => {
+						userAction(e);
+						validateForm(e);
+					}}
 					required
 				/>
-				{!fieldValid && (
+				{!validate(fieldValue, userCountry) && (
 					<Form.Control.Feedback className="d-block" type="invalid">
 						{errorMsg}
 					</Form.Control.Feedback>

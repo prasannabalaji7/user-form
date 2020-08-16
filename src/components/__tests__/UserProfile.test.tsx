@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, fireEvent, waitForElement } from '@testing-library/react';
-import { UserDetail } from '../UserDetail';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { initialState } from '../../store/RootReducer';
@@ -8,10 +7,7 @@ import { screen, waitFor } from '@testing-library/dom';
 import { UserProfile } from '../UserProfile';
 import renderer from 'react-test-renderer';
 
-function isElementInput<T extends HTMLElement>(element: T) {
-    // Validate that element is actually an input
-    return element instanceof HTMLInputElement;
-}
+//UNIT TESTING ON VALUE SETTING FOR FIELDS HERE Validtion Validate-test.ts and dispatch Root_Reducer will have the implementation testing
 
 describe('<UserProfile />', () => {
   const mockStore = configureStore();
@@ -25,57 +21,66 @@ describe('<UserProfile />', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+
   });
-  test('when we enter data in user name it updates in form- User Name', async () => {
+  test('when user name is updates in form  it reflects in the element', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
         <UserProfile />
       </Provider>
     );
-    fireEvent.change(getByTestId('user-name'), {
-      target: { value: 'User Name' },
-    });
     expect((store.getState() as any).userFormData.userName).toBe('User Name');
+    const inputNode = screen.getByTestId("user-name") as HTMLInputElement;
+    expect(inputNode.value).toEqual('User Name');
+    inputNode.value = 'User Name 2';
+    fireEvent.change(inputNode);
+    expect(inputNode.value).toEqual('User Name 2');   
   });
-  test('whe we enter data in email it updates in form- userEmail', async () => {
+  test('when email is updates in form  it reflects in the element', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
         <UserProfile />
       </Provider>
     );
-    fireEvent.change(getByTestId('userEmail'), { target: { value: 1 } });
-    expect((store.getState() as any).userFormData.userEmail).toBe(
-      'email@domain.com'
-    );
+    expect((store.getState() as any).userFormData.userEmail).toBe('email@domain.com');
+    const emailId = getByTestId('userEmail') as HTMLInputElement;
+    expect(emailId.value).toEqual('email@domain.com');
+    emailId.value = "test@gmail.com";
+    fireEvent.change(emailId);
+    expect(emailId.value).toEqual('test@gmail.com');
+
   });
-  test('when we enter data in role it updates in form - userRole', async () => {
+  test('when user role is updates in form  it reflects in the element', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
         <UserProfile />
       </Provider>
     );
-    fireEvent.change(getByTestId('userRole'), {
-      target: { value: 'User Role' },
-    });
     expect((store.getState() as any).userFormData.userRole).toBe('User Role');
+    const userRole = getByTestId('userRole') as HTMLInputElement;
+    expect(userRole.value).toEqual('User Role');
+    userRole.value = "Engineer";    
+    fireEvent.change(userRole);
+    expect(userRole.value).toEqual('Engineer');    
   });
-  test('when we enter mobile number it updates in form- userMobile', async () => {
+  test('when we enter mobile number it updates in form- element', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
       <Provider store={store}>
         <UserProfile />
       </Provider>
     );
-    fireEvent.change(getByTestId('userMobile'), {
-      target: { value: '+9311111111' },
-    });
-    expect((store.getState() as any).userFormData.userMobile).toBe(
-      '+9311111111'
-    );
+     expect((store.getState() as any).userFormData.userRole).toBe('User Role');
+    const userMobile = getByTestId('userMobile') as HTMLInputElement;
+    expect(userMobile.value).toEqual('+9311111111');
+    userMobile.value = "+911111111";    
+    fireEvent.change(userMobile);    
+    expect(userMobile.value).toBe('+911111111');
   });
+
   test('when we change the country code mobile number prefix updates in form- userCountry', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
@@ -83,15 +88,15 @@ describe('<UserProfile />', () => {
         <UserProfile />
       </Provider>
     );
-    fireEvent.change(getByTestId('userCountry'), {
-      target: { value: 'Afghanistan' },
-    });
-    expect((store.getState() as any).userFormData.userCountry).toBe(
-      'Afghanistan'
-    );
-
-    expect((store.getState() as any).userFormData.userMobile).toContain('+93');
+    expect((store.getState() as any).userFormData.userCountry).toBe('Afghanistan');
+    const userCountry = getByTestId('userCountry') as HTMLInputElement;
+    expect(userCountry.value).toEqual('Afghanistan');
+    userCountry.value = "Singapore";    
+    fireEvent.change(userCountry);    
+    expect(userCountry.value).toBe('Singapore');
   });
+
+  
   test('when we click submit in the form we display details it in profile - submit', async () => {
     const store = mockStore(initialState);
     const { getByTestId } = render(
@@ -113,5 +118,5 @@ describe('<UserProfile />', () => {
     fireEvent.click(getByTestId('cancel'), { target: { value: 1 } });
     expect((store.getState() as any).isEditBtnVisible).toBe(false);
 
-  });
+  });  
 });

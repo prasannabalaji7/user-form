@@ -1,7 +1,7 @@
 import RootDispatcher from '../RootDispatcher';
 
 describe('Root Dispatcher', () => {
-    test('Dispatch Name Change', () => {
+    test('when name Change', () => {
         const dispatch = jest.fn();
         new RootDispatcher(dispatch).nameChange('User Name');
         expect(dispatch).toBeCalledWith({
@@ -9,7 +9,7 @@ describe('Root Dispatcher', () => {
             type: 'nameChange',
         });
     });
-    test('when user name is changed', () => {
+    test('when role is changed', () => {
         const dispatch = jest.fn();
         new RootDispatcher(dispatch).roleChange('User Role');
         expect(dispatch).toBeCalledWith({
@@ -17,7 +17,7 @@ describe('Root Dispatcher', () => {
             type: 'roleChange',
         });
     });
-    test('when use mobile is change', () => {
+    test('when mobile is change', () => {
         const dispatch = jest.fn();
         new RootDispatcher(dispatch).numberChange('100');
         expect(dispatch).toBeCalledWith({

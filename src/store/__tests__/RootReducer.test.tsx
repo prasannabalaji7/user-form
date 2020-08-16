@@ -1,6 +1,21 @@
 import { RootReducer, initialState } from "../RootReducer";
 
 describe("RootReducer", () => {
+    //setting compoent validation to state for submit button enabling
+    test("form is validated on UI and state is updated", () => {
+        expect(
+            RootReducer(undefined, {
+                type: "validateSubmit",
+                payload: {
+                    formValid: true,
+                },
+            })
+        ).toEqual({
+            ...initialState,
+            formValid: true
+        });
+    });
+
     test("Submit Reducer", () => {
         expect(
             RootReducer(undefined, {
@@ -22,24 +37,43 @@ describe("RootReducer", () => {
         });
     });
 
-    test("form becomes invalid when values in the form are wrong which disabls submit", () => {
+    test("name is changed and it reflects in state", () => {
         expect(
             RootReducer(undefined, {
                 type: "nameChange",
                 payload: {
-                    userName: "",
+                    userName: "Prasanna",
                 },
             })
         ).toEqual({
             ...initialState,
-            formValid: false,
+            formValid: true,
             userFormData: {
                 ...initialState.userFormData,
-                userName: "",
+                userName: "Prasanna",
             }
         });
     });
-    test("when mobile number changed", () => {
+
+    test("role is changed and it reflects in state", () => {
+        expect(
+            RootReducer(undefined, {
+                type: "roleChange",
+                payload: {
+                    userRole: "Engineer",
+                },
+            })
+        ).toEqual({
+            ...initialState,
+            formValid: true,
+            userFormData: {
+                ...initialState.userFormData,
+                userRole: "Engineer",
+            }
+        });
+    });
+
+    test("number is changed and it reflects in state", () => {
         expect(
             RootReducer(undefined, {
                 type: "numberChange",
@@ -55,7 +89,7 @@ describe("RootReducer", () => {
             }
         });
     });
-    test("when country value in the form changes", () => {
+    test("country is changed and it reflects in state", () => {
         expect(
             RootReducer(undefined, {
                 type: "countryChange",
@@ -71,4 +105,6 @@ describe("RootReducer", () => {
             }
         });
     });
+
+
 });

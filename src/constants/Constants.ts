@@ -1,4 +1,4 @@
-export const userExp = /^(?!\s*$)[-a-zA-Z_:,.\s]{1,25}$/
+export const userExp = /^(?!\s*$)[-a-zA-Z_:,.\s]{1,30}$/
 
 export const emailExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 

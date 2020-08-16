@@ -2,7 +2,7 @@
 
 exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
 <div
-  className="childContainer readOnlyMode"
+  className="childContainer"
 >
   <form
     className=""
@@ -55,7 +55,7 @@ exports[`<UserDetail /> Snapshot Testing - Invalid Values 1`] = `
           placeholder="Name"
           readOnly={true}
           required={true}
-          type="text"
+          type="email"
           value=""
         />
         <div
@@ -168,7 +168,7 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
         className="col-sm-8"
       >
         <input
-          className="plainView form-control"
+          className="form-control"
           data-testId="user-name"
           onChange={[Function]}
           placeholder="Name"
@@ -192,15 +192,20 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
         className="col-sm-8"
       >
         <input
-          className="in-valid form-control"
+          className="form-control"
           data-testId="userEmail"
           onChange={[Function]}
           placeholder="Name"
           readOnly={false}
           required={true}
-          type="text"
+          type="email"
           value="testEmail"
         />
+        <div
+          className="d-block invalid-feedback"
+        >
+          please enter email in email@domain.com format
+        </div>
       </div>
     </div>
     <div
@@ -216,7 +221,7 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
         className="col-sm-8"
       >
         <input
-          className="in-valid form-control"
+          className="form-control"
           data-testId="userRole"
           onChange={[Function]}
           placeholder="Name"
@@ -240,7 +245,7 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
         className="col-sm-8"
       >
         <input
-          className="in-valid form-control"
+          className="form-control"
           data-testId="userMobile"
           onChange={[Function]}
           placeholder="Name"
@@ -249,6 +254,11 @@ exports[`<UserDetail /> Snapshot Testing 1`] = `
           type="text"
           value="12345"
         />
+        <div
+          className="d-block invalid-feedback"
+        >
+          please apply correct country code and number 
+        </div>
       </div>
     </div>
     <div

@@ -23,6 +23,11 @@ exports[`what dom renderer is inital load will remain after theere is change in 
       type="text"
       value="Test 2"
     />
+    <div
+      className="d-block invalid-feedback"
+    >
+      errorMsg
+    </div>
   </div>
 </div>
 `;

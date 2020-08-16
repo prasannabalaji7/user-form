@@ -13,7 +13,7 @@ export const validateEmail = (matchText: string): boolean =>
 
 export const validateMobile = (
 	matchText: string,
-	userCountry: string
+	userCountry?: string
 ): boolean => {
 	if (matchText || userCountry) {
 		const mobilecode = countryData.filter(

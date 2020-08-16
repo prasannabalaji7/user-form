@@ -26,7 +26,7 @@ exports[`<ProfileCard /> Snapshot Testing 1`] = `
           disabled={false}
           onClick={[Function]}
         >
-          Test123
+          Updated Name
         </div>
         <div
           className="borderless list-group-item"
@@ -34,7 +34,7 @@ exports[`<ProfileCard /> Snapshot Testing 1`] = `
           disabled={false}
           onClick={[Function]}
         >
-          TestRole
+          Updated Role
         </div>
         <div
           className="borderless list-group-item"

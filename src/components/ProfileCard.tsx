@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Card, Image, ListGroupItem, ListGroup } from 'react-bootstrap';
 import Popup from './Popup';
@@ -13,7 +13,7 @@ export interface ProfileProps {
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
 	const [popup, setPopup] = useState(popupMessage);
-	const {isEditBtnVisible,userProfileName,userProfileCountry,userProfileRole} = props;
+	const { isEditBtnVisible, userProfileName, userProfileCountry, userProfileRole } = props;
 	const editableClass = classNames('childContainer', {
 		profileReadOnly: isEditBtnVisible,
 	});

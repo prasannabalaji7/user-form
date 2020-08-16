@@ -34,7 +34,7 @@ export const initialState: InitialStateInterface = {
         userProfileRole: 'User Role',
         userProfileCountry: 'Afghanistan',
     },
-    formValid: false,
+    formValid: true,
     isEditBtnVisible: false,
 };
 
@@ -88,7 +88,7 @@ export const RootReducer: Reducer<InitialStateInterface, DispatchAction> = (
                 },
             };
         case 'validateSubmit':
-            return { ...state, formValid: !action.payload.formValid };
+            return { ...state, formValid: action.payload.formValid };
         case 'onEdit':
             return {
                 ...state,

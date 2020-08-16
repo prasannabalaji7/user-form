@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 import renderer from 'react-test-renderer';
 
 describe('<ProfileCard />', () => {
-    test('defaut value in the profile page', async () => {
+    test('defaut value in the profile form a new store ', async () => {
         const { getByText } = render(
             <ProfileCard
                 userProfileName='Test123'
@@ -22,8 +22,8 @@ describe('<ProfileCard />', () => {
         const tree = renderer
             .create(
                 <ProfileCard
-                    userProfileName='Test123'
-                    userProfileRole='TestRole'
+                    userProfileName='Updated Name'
+                    userProfileRole='Updated Role'
                     userProfileCountry='Singapore'
                     isEditBtnVisible={false}
                 />

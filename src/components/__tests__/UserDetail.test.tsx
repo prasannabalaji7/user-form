@@ -1,15 +1,16 @@
-import React from 'react';
-import { render, fireEvent, waitForElement } from '@testing-library/react';
-import { UserDetail } from '../UserDetail';
-import configureStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import { initialState } from '../../store/RootReducer';
-import { screen } from '@testing-library/dom';
-import renderer from 'react-test-renderer';
+import React from "react";
+import { render, fireEvent, waitForElement } from "@testing-library/react";
+import { UserDetail } from "../UserDetail";
+import configureStore from "redux-mock-store";
+import { Provider } from "react-redux";
+import { initialState } from "../../store/RootReducer";
+import { screen } from "@testing-library/dom";
+import renderer from "react-test-renderer";
 
-describe('<UserDetail />', () => {
+describe("<UserDetail />", () => {
     const mockStore = configureStore();
-    test('Snapshot Testing', () => {
+   
+    test("Snapshot Testing", () => {
         const store = mockStore(initialState);
         const tree = renderer
             .create(
@@ -20,11 +21,11 @@ describe('<UserDetail />', () => {
                         handleUserName={() => {}}
                         handleMobileChange={() => {}}
                         handleRoleChange={() => {}}
-                        userName='TestUser'
-                        userEmail='testEmail'
-                        userRole='testRole'
-                        userMobile='12345'
-                        userCountry='Singapore'
+                        userName="TestUser"
+                        userEmail="testEmail"
+                        userRole="testRole"
+                        userMobile="12345"
+                        userCountry="Singapore"
                         isEditBtnVisible={false}
                         formValid={true}
                     />
@@ -33,7 +34,7 @@ describe('<UserDetail />', () => {
             .toJSON();
         expect(tree).toMatchSnapshot();
     });
-    test('Snapshot Testing - Invalid Values', () => {
+    test("Snapshot Testing - Invalid Values", () => {
         const store = mockStore(initialState);
         const tree = renderer
             .create(
@@ -44,11 +45,11 @@ describe('<UserDetail />', () => {
                         handleUserName={() => {}}
                         handleMobileChange={() => {}}
                         handleRoleChange={() => {}}
-                        userName='!!'
-                        userEmail=''
-                        userRole='!!'
-                        userMobile=''
-                        userCountry=''
+                        userName="!!"
+                        userEmail=""
+                        userRole="!!"
+                        userMobile=""
+                        userCountry=""
                         isEditBtnVisible={true}
                         formValid={true}
                     />
@@ -57,4 +58,4 @@ describe('<UserDetail />', () => {
             .toJSON();
         expect(tree).toMatchSnapshot();
     });
-});
+ });

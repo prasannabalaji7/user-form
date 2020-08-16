@@ -88,16 +88,16 @@ export const UserProfile = () => {
             Edit
           </Button>
         ) : (
-          <Button
-            type='submit'
-            data-testId='submit'
-            className='customSpacing'
-            disabled={formData.isEditBtnVisible ? false : !valid}
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
-        )}
+            <Button
+              type='submit'
+              data-testId='submit'
+              className='customSpacing'
+              disabled={formData.isEditBtnVisible ? false : !valid}
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          )}
         <Button
           className='customSpacing'
           data-testId='cancel'

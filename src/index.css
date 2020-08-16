@@ -10,9 +10,11 @@ body {
 .flexParent {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   margin: 5px;
   background-color: #fff;
+  width: 95%;
+  min-width: 15em;
 }
 
 .childContainer {
@@ -28,9 +30,9 @@ body {
   border: transparent;
 }
 
-.readOnlyMode {
+/*.readOnlyMode {
   min-width: 30em;
-}
+}*/
 
 input[readonly].plainView {
   background-color: #fff;
@@ -57,7 +59,7 @@ input[readonly].plainView {
   justify-content: flex-end;
   align-items: flex-end;
   align-content: flex-end;
-  width: 92%;
+  width: 95%;
   margin: 3px;
 }
 
@@ -68,6 +70,7 @@ input[readonly].plainView {
   background-color: #dadcdc;
   margin: auto;
   width: 55%;
+  min-width: 35em;
   margin-top: 5%;
 }
 
@@ -80,17 +83,23 @@ input[readonly].plainView {
   border-bottom: 1px solid #eb516d;
 }
 
-@media screen and (max-width: 700px) {
-  .readOnlyMode {
-    min-width: 25em;
+@media screen and (max-width: 768px) {
+  body {
+    margin-top: 0;
   }
+  /* .readOnlyMode {
+    min-width: 25em;
+  }*/
+  .customSpacing {
+    width: 50%;
+    margin: 10px;
+  }
+
   .usercontainer {
-    display: flex;
-    flex-direction: column;
-    background-color: #dadcdc;
     width: 100%;
     margin-top: 0;
   }
+
   .flexParent {
     flex-wrap: wrap;
   }
@@ -101,13 +110,10 @@ input[readonly].plainView {
   .toolBar {
     display: flex;
     width: 100%;
-    justify-content: space-evenly;    
+    justify-content: space-evenly;
   }
   .toolBar .button {
-    width:100%;
-  } 
-}
-
-.profileReadOnly {
-  min-width: 15em;
+    width: 100%;
+    margin: 0;
+  }
 }

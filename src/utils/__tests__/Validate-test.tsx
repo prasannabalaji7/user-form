@@ -2,8 +2,11 @@ import { validatePlainText, validateEmail, validateMobile } from "../Validate";
 
 describe("Validate Fields", () => {
 	test("field in the form validated", () => {
+		//for Role & User name
 		expect(validatePlainText("User Name")).toEqual(true);
+
 		expect(validateEmail("prasanna@123.co")).toEqual(true);
+		
 		expect(validateMobile("+658616262", "Singapore")).toEqual(true);
 	});
 
