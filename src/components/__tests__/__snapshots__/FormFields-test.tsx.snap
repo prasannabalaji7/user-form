@@ -17,7 +17,6 @@ exports[`what dom renderer is inital load will remain after theere is change in 
       className="form-control"
       data-testId="anyField"
       onChange={[Function]}
-      placeholder="Name"
       readOnly={false}
       required={true}
       type="text"

@@ -98,7 +98,7 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 								data-testId="userCountry"
 								onChange={(e: ChangeEvent<HTMLInputElement>) =>{			
 									setCountrySelected(e.target.value);						
-									return props.handleCountryChange
+									return props.handleCountryChange(e);
 								}
 								}
 							>
