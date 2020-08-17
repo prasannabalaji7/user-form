@@ -66,7 +66,6 @@ export const UserDetail: React.FC<UserDetailProps> = (props) => {
 					testId="userRole"
 					label="Role"
 					type="text"
-					//fieldValid={valid.isValidRole}
 					validate={validatePlainText}
 					isReadOnly={isEditBtnVisible}
 					fieldValue={userRole}
